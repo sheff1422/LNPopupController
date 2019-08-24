@@ -49,11 +49,7 @@
 	next.accessibilityIdentifier = @"NextButton";
 	next.accessibilityTraits = UIAccessibilityTraitButton;
 	
-	if([[[NSUserDefaults standardUserDefaults] objectForKey:PopupSettingsBarStyle] unsignedIntegerValue] == LNPopupBarStyleCompact
-#if ! TARGET_OS_MACCATALYST
-	   || NSProcessInfo.processInfo.operatingSystemVersion.majorVersion < 10
-#endif
-	   )
+	if([[[NSUserDefaults standardUserDefaults] objectForKey:PopupSettingsBarStyle] unsignedIntegerValue] == LNPopupBarStyleCompact)
 	{
 		self.popupItem.leftBarButtonItems = @[ play ];
 		self.popupItem.rightBarButtonItems = @[ next, stop ];

@@ -59,7 +59,14 @@
 {
 	_chevronView = [[LNChevronView alloc] initWithFrame:CGRectMake(0, 0, 42, 15)];
 	_chevronView.width = 5.5;
-	[_chevronView setState:LNChevronViewStateUp animated:NO];
+	if(@available(iOS 13, *))
+	{
+		[_chevronView setState:LNChevronViewStateFlat animated:NO];
+	}
+	else
+	{
+		[_chevronView setState:LNChevronViewStateUp animated:NO];
+	}
 	[self addSubview:_chevronView];
 }
 

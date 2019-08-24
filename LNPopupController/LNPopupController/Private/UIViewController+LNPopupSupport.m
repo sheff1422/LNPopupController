@@ -141,7 +141,7 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 
 - (LNPopupContentView *)popupContentView
 {
-	return self._ln_popupController.popupContentView;
+	return self._ln_popupController.popupContentViewController.popupContentView;
 }
 
 - (LNPopupInteractionStyle)popupInteractionStyle
@@ -243,14 +243,7 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 		return UIEdgeInsetsZero;
 	}
 	
-	if (@available(iOS 11.0, *))
-	{
-		return UIEdgeInsetsMake(0, 0, self.view.superview.safeAreaInsets.bottom, 0);
-	}
-	else
-	{
-		return UIEdgeInsetsZero;
-	}
+	return UIEdgeInsetsMake(0, 0, self.view.superview.safeAreaInsets.bottom, 0);
 }
 
 - (CGRect)defaultFrameForBottomDockingView

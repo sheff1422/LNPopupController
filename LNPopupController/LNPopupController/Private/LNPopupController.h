@@ -11,18 +11,7 @@
 #import "UIViewController+LNPopupSupportPrivate.h"
 #import "LNPopupCloseButton.h"
 #import "LNPopupContentView.h"
-
-@interface LNPopupContentView ()
-
-- (instancetype)initWithFrame:(CGRect)frame;
-
-@property (nonatomic, strong, readwrite) UIPanGestureRecognizer* popupInteractionGestureRecognizer;
-@property (nonatomic, strong, readwrite) LNPopupCloseButton* popupCloseButton;
-@property (nonatomic, strong) UIVisualEffectView* effectView;
-
-@property (nonatomic, weak) UIViewController* currentPopupContentViewController;
-
-@end
+#import "LNPopupContentViewController.h"
 
 @interface LNPopupController : NSObject
 
@@ -32,7 +21,7 @@
 
 @property (nonatomic, strong) LNPopupBar* popupBar;
 @property (nonatomic, strong, readonly) LNPopupBar* popupBarStorage;
-@property (nonatomic, strong) LNPopupContentView* popupContentView;
+@property (nonatomic, strong) LNPopupContentViewController* popupContentViewController;
 @property (nonatomic, strong) UIScrollView* popupContentContainerView;
 
 @property (nonatomic) LNPopupPresentationState popupControllerState;
@@ -45,13 +34,9 @@
 
 @property (nonatomic, weak) UIViewController* effectiveStatusBarUpdateController;
 
-- (CGFloat)_percentFromPopupBar;
-
-- (void)_setContentToState:(LNPopupPresentationState)state;
+- (void)_resetPopupBar;
 
 - (void)_movePopupBarAndContentToBottomBarSuperview;
-
-- (void)_repositionPopupCloseButton;
 
 - (void)presentPopupBarAnimated:(BOOL)animated openPopup:(BOOL)open completion:(void(^)(void))completionBlock;
 - (void)openPopupAnimated:(BOOL)animated completion:(void(^)(void))completionBlock;
@@ -61,5 +46,7 @@
 - (void)_configurePopupBarFromBottomBar;
 
 + (CGFloat)_statusBarHeightForView:(UIView*)view;
+
+- (CGRect)_frameForClosedPopupBar;
 
 @end

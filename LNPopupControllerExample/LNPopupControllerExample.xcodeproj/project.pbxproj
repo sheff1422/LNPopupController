@@ -13,6 +13,7 @@
 		39277A0C1B58228000293F95 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39277A0B1B58228000293F95 /* AppDelegate.m */; };
 		39277A151B58228000293F95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39277A131B58228000293F95 /* Main.storyboard */; };
 		39277A171B58228000293F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39277A161B58228000293F95 /* Assets.xcassets */; };
+		3934DEA5230FF1AE006A61A3 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3934DEA4230FF1AE006A61A3 /* Launch.storyboard */; };
 		3938FAEF1B6BE4FD009FD48A /* LoremIpsum.m in Sources */ = {isa = PBXBuildFile; fileRef = 3938FAEE1B6BE4FD009FD48A /* LoremIpsum.m */; };
 		393F23231E16BF1D000E969D /* MapScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 393F23221E16BF1D000E969D /* MapScene.storyboard */; };
 		393F23251E16C04A000E969D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F23241E16C04A000E969D /* MapViewController.swift */; };
@@ -84,6 +85,7 @@
 		39277A141B58228000293F95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39277A161B58228000293F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39277A1B1B58228000293F95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3934DEA4230FF1AE006A61A3 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		3938FAED1B6BE4FD009FD48A /* LoremIpsum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoremIpsum.h; sourceTree = "<group>"; };
 		3938FAEE1B6BE4FD009FD48A /* LoremIpsum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoremIpsum.m; sourceTree = "<group>"; };
 		393F23221E16BF1D000E969D /* MapScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MapScene.storyboard; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				39A3B58C230D433100E10425 /* LNPopupControllerExample.entitlements */,
+				3934DEA4230FF1AE006A61A3 /* Launch.storyboard */,
 				39277A131B58228000293F95 /* Main.storyboard */,
 				397C560B1B74D47D007A67F0 /* Demo - Testing Scene (Objective-C) */,
 				397C560C1B74D747007A67F0 /* Demo - Music Scene (Swift) */,
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39140B901DBD69540036A6C5 /* Music.storyboard in Resources */,
+				3934DEA5230FF1AE006A61A3 /* Launch.storyboard in Resources */,
 				393F23231E16BF1D000E969D /* MapScene.storyboard in Resources */,
 				39277A171B58228000293F95 /* Assets.xcassets in Resources */,
 				39277A151B58228000293F95 /* Main.storyboard in Resources */,
@@ -583,7 +587,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = S9QFG2VH2E;
 				INFOPLIST_FILE = LNPopupControllerExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.LeoNatan.LNPopupControllerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -609,7 +613,7 @@
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = S9QFG2VH2E;
 				INFOPLIST_FILE = LNPopupControllerExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.LeoNatan.LNPopupControllerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

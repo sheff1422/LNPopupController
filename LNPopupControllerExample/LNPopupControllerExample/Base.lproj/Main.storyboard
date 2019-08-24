@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cyK-Q5-zYP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cyK-Q5-zYP">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -233,7 +234,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Wh6-v8-fQK">
             <objects>
-                <navigationController modalPresentationStyle="fullScreen" toolbarHidden="NO" id="GHH-ob-Ng8" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="GHH-ob-Ng8" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="2ug-wj-yax">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -255,7 +256,7 @@
         <!--Split View Controller-->
         <scene sceneID="KO7-t9-gOw">
             <objects>
-                <splitViewController modalPresentationStyle="fullScreen" id="syE-JZ-XA1" customClass="SplitViewController" sceneMemberID="viewController">
+                <splitViewController id="syE-JZ-XA1" customClass="SplitViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="l54-z5-xcG" kind="relationship" relationship="detailViewController" id="zMM-Ae-JHK"/>
                         <segue destination="l54-z5-xcG" kind="relationship" relationship="masterViewController" id="PnH-3x-X9A"/>
@@ -268,7 +269,7 @@
         <!--Split View Controller-->
         <scene sceneID="0aA-gd-S0Z">
             <objects>
-                <splitViewController modalPresentationStyle="fullScreen" id="NWj-M1-Csm" customClass="SplitViewController" sceneMemberID="viewController">
+                <splitViewController id="NWj-M1-Csm" customClass="SplitViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="GHH-ob-Ng8" kind="relationship" relationship="masterViewController" id="IDA-Po-Fia"/>
                         <segue destination="l54-z5-xcG" kind="relationship" relationship="detailViewController" id="04d-1K-Lzo"/>
@@ -289,11 +290,7 @@
         <!--LNPopupController-->
         <scene sceneID="43s-6c-3hg">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="l54-z5-xcG" customClass="FirstViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tSC-yC-cfV"/>
-                        <viewControllerLayoutGuide type="bottom" id="nEq-zO-EP8"/>
-                    </layoutGuides>
+                <viewController id="l54-z5-xcG" customClass="FirstViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1ke-mH-VCb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,16 +326,17 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="N4q-gh-14d" secondAttribute="centerX" id="0fv-yD-Bxc"/>
-                            <constraint firstItem="nEq-zO-EP8" firstAttribute="top" secondItem="N4q-gh-14d" secondAttribute="bottom" constant="8" id="7gK-sx-KzT"/>
+                            <constraint firstItem="hNX-u9-eop" firstAttribute="centerX" secondItem="N4q-gh-14d" secondAttribute="centerX" id="0fv-yD-Bxc"/>
+                            <constraint firstItem="hNX-u9-eop" firstAttribute="bottom" secondItem="N4q-gh-14d" secondAttribute="bottom" constant="8" id="7gK-sx-KzT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PfZ-Ec-LGF" secondAttribute="trailing" id="L3U-iD-b4L"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DxD-7y-6Na" secondAttribute="trailing" id="QKL-fS-2j5"/>
                             <constraint firstItem="DxD-7y-6Na" firstAttribute="centerY" secondItem="1ke-mH-VCb" secondAttribute="centerY" priority="999" id="Rzj-f0-6l2"/>
-                            <constraint firstItem="PfZ-Ec-LGF" firstAttribute="top" secondItem="tSC-yC-cfV" secondAttribute="bottom" id="fhX-Yz-XdE"/>
+                            <constraint firstItem="PfZ-Ec-LGF" firstAttribute="top" secondItem="hNX-u9-eop" secondAttribute="top" id="fhX-Yz-XdE"/>
                             <constraint firstItem="DxD-7y-6Na" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1ke-mH-VCb" secondAttribute="leadingMargin" id="jRx-Ij-5IR"/>
                             <constraint firstItem="PfZ-Ec-LGF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1ke-mH-VCb" secondAttribute="leadingMargin" id="nWt-wC-3nt"/>
-                            <constraint firstItem="nEq-zO-EP8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DxD-7y-6Na" secondAttribute="bottom" constant="20" id="rkC-wh-cOe"/>
+                            <constraint firstItem="hNX-u9-eop" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DxD-7y-6Na" secondAttribute="bottom" constant="20" id="rkC-wh-cOe"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="hNX-u9-eop"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="featured" id="CHZ-OA-bCn"/>
                     <toolbarItems>
@@ -818,7 +816,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="08l-cu-6cc">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="bBi-xD-gOl" sceneMemberID="viewController">
+                <tabBarController id="bBi-xD-gOl" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vB8-aC-ZlJ" customClass="TabBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -858,7 +856,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="kbq-hr-FKV">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="FNS-iY-Dsd" sceneMemberID="viewController">
+                <tabBarController id="FNS-iY-Dsd" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Ttb-b6-jET">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -879,7 +877,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gears" width="16" height="16"/>
+        <image name="gears" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QzR-Fj-x6F"/>
@@ -891,7 +889,7 @@
         <segue reference="iD8-2E-cMh"/>
         <segue reference="19O-Tx-Ntx"/>
         <segue reference="IDA-Po-Fia"/>
-        <segue reference="b6h-Yb-Vtz"/>
+        <segue reference="osK-Oa-kX7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
