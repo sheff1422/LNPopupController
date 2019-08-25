@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString* const PopupSettingsPresentationStyle;
+extern NSString* const PopupSettingsEnableDimming;
+extern NSString* const PopupSettingsEnableDimmingClose;
 extern NSString* const PopupSettingsBarStyle;
 extern NSString* const PopupSettingsInteractionStyle;
 extern NSString* const PopupSettingsProgressViewStyle;

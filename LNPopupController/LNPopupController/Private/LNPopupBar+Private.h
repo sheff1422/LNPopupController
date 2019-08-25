@@ -68,8 +68,8 @@ inline __attribute__((always_inline)) LNPopupBarStyle _LNPopupResolveBarStyleFro
 @property (nonatomic, strong, readwrite) UIProgressView* progressView;
 
 @property (nonatomic, strong) UIView* contentView;
-//@property (nonatomic, strong) UIToolbar* toolbar;
 @property (nonatomic, strong) UIVisualEffectView* backgroundView;
+@property (nonatomic, assign) CGFloat extendedBackgroundViewHeight;
 
 @property (nonatomic, copy) NSString* accessibilityCenterLabel;
 @property (nonatomic, copy) NSString* accessibilityCenterHint;
@@ -88,8 +88,6 @@ inline __attribute__((always_inline)) LNPopupBarStyle _LNPopupResolveBarStyleFro
 - (void)_layoutBarButtonItems;
 
 - (void)_setTitleViewMarqueesPaused:(BOOL)paused;
-
-- (void)_removeAnimationFromBarItems;
 
 - (void)_transitionCustomBarViewControllerWithPopupContainerSize:(CGSize)size withCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator;
 - (void)_transitionCustomBarViewControllerWithPopupContainerTraitCollection:(UITraitCollection *)newCollection withCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator;

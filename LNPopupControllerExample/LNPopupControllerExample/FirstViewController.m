@@ -93,6 +93,11 @@
 	__weak IBOutlet UIBarButtonItem *_barStyleButton;
 }
 
+- (void)dealloc
+{
+	
+}
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -252,7 +257,6 @@
 	targetVC.popupContentView.popupCloseButton.accessibilityLabel = NSLocalizedString(@"Custom popup button accessibility label", @"");
 	targetVC.popupContentView.popupCloseButton.accessibilityHint = NSLocalizedString(@"Custom popup button accessibility hint", @"");
 	
-//	targetVC.popupBar.previewingDelegate = self;
 	targetVC.popupBar.progressViewStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:PopupSettingsProgressViewStyle] unsignedIntegerValue];
 	targetVC.popupBar.barStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:PopupSettingsBarStyle] unsignedIntegerValue];
 	targetVC.popupInteractionStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:PopupSettingsInteractionStyle] unsignedIntegerValue];
@@ -282,6 +286,12 @@
 		[targetVC.popupBar addInteraction:i];
 	}
 
+	targetVC.definesPresentationContext = YES;
+	
+	targetVC.popupContentView.popupPresentationStyle = [NSUserDefaults.standardUserDefaults integerForKey:PopupSettingsPresentationStyle];
+	targetVC.popupContentView.dimsBackground = [NSUserDefaults.standardUserDefaults boolForKey:PopupSettingsEnableDimming];
+	targetVC.popupContentView.closesPopupOnBackgroundTap = [NSUserDefaults.standardUserDefaults boolForKey:PopupSettingsEnableDimmingClose];
+	
 	[targetVC presentPopupBarWithContentViewController:demoVC animated:YES completion:nil];
 }
 

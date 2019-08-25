@@ -57,8 +57,8 @@
 
 - (void)_setupForChevronButton
 {
-	_chevronView = [[LNChevronView alloc] initWithFrame:CGRectMake(0, 0, 42, 15)];
-	_chevronView.width = 5.5;
+	_chevronView = [[LNChevronView alloc] initWithFrame:CGRectMake(0, 0, 40, 15)];
+	_chevronView.width = 5;
 	if(@available(iOS 13, *))
 	{
 		[_chevronView setState:LNChevronViewStateFlat animated:NO];

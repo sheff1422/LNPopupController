@@ -95,7 +95,7 @@ const UIBlurEffectStyle LNBackgroundStyleInherit = -9876;
 	LNPopupBarStyle _resolvedStyle;
 
 	BOOL _delaysBarButtonItemLayout;
-	UIView* _titlesView;
+	UIStackView* _titlesView;
 	UILabel<__MarqueeLabelType>* _titleLabel;
 	UILabel<__MarqueeLabelType>* _subtitleLabel;
 	BOOL _needsLabelsLayout;
@@ -209,7 +209,8 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		_backgroundView.userInteractionEnabled = NO;
 		[self addSubview:_backgroundView];
 		
-		_contentView = _backgroundView.contentView;
+		_contentView = [UIView new];
+		[self addSubview:_contentView];
 		
 		_resolvedStyle = _LNPopupResolveBarStyleFromBarStyle(_barStyle);
 		
@@ -222,7 +223,9 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		
 		[_contentView addSubview:_toolbar];
 		
-		_titlesView = [[UIView alloc] initWithFrame:self.bounds];
+		_titlesView = [[UIStackView alloc] initWithFrame:self.bounds];
+		_titlesView.axis = UILayoutConstraintAxisVertical;
+		_titlesView.distribution = UIStackViewDistributionFill;
 		_titlesView.autoresizingMask = UIViewAutoresizingNone;
 		_titlesView.accessibilityTraits = UIAccessibilityTraitButton;
 		_titlesView.isAccessibilityElement = YES;
@@ -262,6 +265,7 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		[_backgroundView.contentView addSubview:_shadowView];
 		
 		_bottomShadowView = [UIView new];
+		_bottomShadowView.hidden = YES;
 		_bottomShadowView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
 		[_backgroundView.contentView addSubview:_bottomShadowView];
 		
@@ -279,10 +283,15 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		self.barItemsSemanticContentAttribute = UISemanticContentAttributePlayback;
 		
 		self.isAccessibilityElement = NO;
-		self.clipsToBounds = YES;
+//		self.clipsToBounds = YES;
 	}
 	
 	return self;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+	[super setFrame:frame];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -299,39 +308,52 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	[self setNeedsLayout];
 }
 
+- (void)setExtendedBackgroundViewHeight:(CGFloat)extendedBackgroundViewHeight
+{
+	_extendedBackgroundViewHeight = extendedBackgroundViewHeight;
+	
+	CGFloat height = _LNPopupBarHeightForBarStyle(self.barStyle, self.customBarViewController);
+	CGRect contentFrame = CGRectMake(0, 0, self.bounds.size.width, height);
+	[_backgroundView setFrame:CGRectMake(contentFrame.origin.x, contentFrame.origin.y, contentFrame.size.width, contentFrame.size.height + self.extendedBackgroundViewHeight)];
+}
+
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
 	
-	[_backgroundView setFrame:self.bounds];
+	CGFloat height = _LNPopupBarHeightForBarStyle(self.barStyle, self.customBarViewController);
+	CGRect contentFrame = CGRectMake(0, 0, self.bounds.size.width, height);
+	
+	[_backgroundView setFrame:CGRectMake(contentFrame.origin.x, contentFrame.origin.y, contentFrame.size.width, contentFrame.size.height + self.extendedBackgroundViewHeight)];
+	[_contentView setFrame:contentFrame];
 	
 	[self _layoutImageView];
 	
-	[UIView performWithoutAnimation:^{
-		_toolbar.frame = CGRectMake(0, 0, self.bounds.size.width, _LNPopupBarHeightForBarStyle(_resolvedStyle, _customBarViewController));
-		[_toolbar layoutIfNeeded];
-		
-		[_contentView bringSubviewToFront:_highlightView];
-		[_contentView bringSubviewToFront:_toolbar];
-		[_contentView bringSubviewToFront:_imageView];
-		[_contentView bringSubviewToFront:_titlesView];
-		[_contentView bringSubviewToFront:_shadowView];
-		[_contentView bringSubviewToFront:_bottomShadowView];
-		
-		_shadowView.frame = CGRectMake(0, 0, _contentView.bounds.size.width, 1 / self.window.screen.scale);
-		_bottomShadowView.frame = CGRectMake(0, _contentView.bounds.size.height - 1 / self.window.screen.scale, _contentView.bounds.size.width, 1 / self.window.screen.scale);
-		
-		if(self.progressViewStyle == LNPopupBarProgressViewStyleTop)
-		{
-			_progressView.frame = CGRectMake(0, 0, _contentView.bounds.size.width, 1.5);
-		}
-		else
-		{
-			_progressView.frame = CGRectMake(0, _contentView.bounds.size.height - 1.5, _contentView.bounds.size.width, 1.5);
-		}
-		
+	_toolbar.frame = contentFrame;
+	[_toolbar layoutIfNeeded];
+	
+	[_contentView bringSubviewToFront:_highlightView];
+	[_contentView bringSubviewToFront:_toolbar];
+	[_contentView bringSubviewToFront:_imageView];
+	[_contentView bringSubviewToFront:_titlesView];
+	[_contentView bringSubviewToFront:_shadowView];
+	[_contentView bringSubviewToFront:_bottomShadowView];
+	
+	_shadowView.frame = CGRectMake(0, 0, _contentView.bounds.size.width, 1 / UIScreen.mainScreen.scale);
+	_bottomShadowView.frame = CGRectMake(0, _contentView.bounds.size.height - 1 / UIScreen.mainScreen.scale, _contentView.bounds.size.width, 1 / UIScreen.mainScreen.scale);
+	
+	if(self.progressViewStyle == LNPopupBarProgressViewStyleTop)
+	{
+		_progressView.frame = CGRectMake(0, 0, _contentView.bounds.size.width, 1.5);
+	}
+	else
+	{
+		_progressView.frame = CGRectMake(0, _contentView.bounds.size.height - 1.5, _contentView.bounds.size.width, 1.5);
+	}
+	
+	dispatch_async(dispatch_get_main_queue(), ^{
 		[self _layoutTitles];
-	}];
+	});
 }
 
 - (UIBlurEffectStyle)backgroundStyle
@@ -598,16 +620,19 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	if(_marqueeScrollEnabled == NO)
 	{
 		__FakeMarqueeLabel* rv = [[__FakeMarqueeLabel alloc] initWithFrame:_titlesView.bounds];
+		rv.translatesAutoresizingMaskIntoConstraints = NO;
 		rv.minimumScaleFactor = 1.0;
 		rv.lineBreakMode = NSLineBreakByTruncatingTail;
 		return rv;
 	}
 	
 	MarqueeLabel* rv = [[MarqueeLabel alloc] initWithFrame:_titlesView.bounds rate:20 andFadeLength:10];
+	rv.translatesAutoresizingMaskIntoConstraints = NO;
 	rv.leadingBuffer = 0.0;
 	rv.trailingBuffer = 20.0;
 	rv.animationDelay = 2.0;
 	rv.marqueeType = MLContinuous;
+	rv.fadeLength = 10;
 	return rv;
 }
 
@@ -749,6 +774,8 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 {
 	UIEdgeInsets titleInsets = UIEdgeInsetsZero;
 	
+//	CGFloat barHeight = _LNPopupBarHeightForBarStyle(self.barStyle, self.customBarViewController);
+	
 	if(_resolvedStyle == LNPopupBarStyleProminent)
 	{
 		[self _updateTitleInsetsForProminentBar:&titleInsets];
@@ -761,20 +788,14 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	titleInsets.left = MAX(titleInsets.left, self.layoutMargins.left);
 	titleInsets.right = MAX(titleInsets.right, self.layoutMargins.right);
 	
-	CGRect frame = _titlesView.frame;
-	frame.size.width = self.bounds.size.width - titleInsets.left - titleInsets.right;
-	frame.size.height = self.bounds.size.height;
-	frame.origin.x = titleInsets.left;
-	
-	_titlesView.frame = frame;
-	
 	if(_needsLabelsLayout == YES)
 	{
 		if(_titleLabel == nil)
 		{
 			_titleLabel = [self _newMarqueeLabel];
+			[_titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
 			_titleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:18 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:12];
-			[_titlesView addSubview:_titleLabel];
+			[_titlesView addArrangedSubview:_titleLabel];
 		}
 		
 		BOOL reset = NO;
@@ -788,8 +809,9 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		if(_subtitleLabel == nil)
 		{
 			_subtitleLabel = [self _newMarqueeLabel];
+			[_subtitleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
 			_subtitleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:14 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:12];
-			[_titlesView addSubview:_subtitleLabel];
+			[_titlesView addArrangedSubview:_subtitleLabel];
 		}
 		
 		if([_subtitleLabel.text isEqualToString:_subtitle] == NO && _subtitle != nil)
@@ -807,27 +829,8 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	
 	[self _setTitleLableFontsAccordingToBarStyleAndTint];
 	
-	CGRect titleLabelFrame = _titlesView.bounds;
-	
-	CGFloat barHeight = _LNPopupBarHeightForBarStyle(_resolvedStyle, _customBarViewController);
-	titleLabelFrame.size.height = barHeight;
 	if(_subtitle.length > 0)
 	{
-		CGRect subtitleLabelFrame = _titlesView.bounds;
-		subtitleLabelFrame.size.height = barHeight;
-		
-		if(_resolvedStyle == LNPopupBarStyleProminent)
-		{
-			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2.1;
-			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 1.5;
-		}
-		else
-		{
-			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2;
-			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 2;
-		}
-		
-		_subtitleLabel.frame = subtitleLabelFrame;
 		_subtitleLabel.hidden = NO;
 		
 		if(_needsLabelsLayout == YES)
@@ -842,15 +845,20 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	{
 		if(_needsLabelsLayout == YES)
 		{
-			[_subtitleLabel resetLabel];
 			[_subtitleLabel pauseLabel];
+			[_subtitleLabel resetLabel];
 			_subtitleLabel.hidden = YES;
 		}
 	}
 	
-	[self _updateAccessibility];
+	CGRect frame;
+	frame.size.width = self.bounds.size.width - titleInsets.left - titleInsets.right;
+	frame.size.height = _titleLabel.intrinsicContentSize.height + (_subtitleLabel.isHidden ? 0 : _subtitleLabel.intrinsicContentSize.height + _titlesView.spacing);
+	frame.origin.x = titleInsets.left;
+	frame.origin.y = CGRectGetMidY(_contentView.bounds) - (frame.size.height / 2);
+	_titlesView.frame = frame;
 	
-	_titleLabel.frame = titleLabelFrame;
+	[self _updateAccessibility];
 	
 	_needsLabelsLayout = NO;
 }
@@ -1106,15 +1114,6 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 	_marqueeScrollEnabled = marqueeScrollEnabled;
 	
 	[self _setNeedsTitleLayout];
-}
-
-- (void)_removeAnimationFromBarItems
-{
-	[_toolbar.items enumerateObjectsUsingBlock:^(UIBarButtonItem* barButtonItem, NSUInteger idx, BOOL* stop)
-	 {
-		 UIView* itemView = [barButtonItem valueForKey:@"view"];
-		 [itemView.layer removeAllAnimations];
-	 }];
 }
 
 - (void)_transitionCustomBarViewControllerWithPopupContainerSize:(CGSize)size withCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

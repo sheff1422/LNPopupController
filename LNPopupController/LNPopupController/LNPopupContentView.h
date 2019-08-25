@@ -11,12 +11,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, LNPopupPresentationStyle) {
+	LNPopupPresentationStyleFullScreen,
+	LNPopupPresentationStyleFullHeight,
+	LNPopupPresentationStyleOverCurrentContext,
+	LNPopupPresentationStyleSheet,
+};
+
 extern const UIBlurEffectStyle LNBackgroundStyleInherit;
 
 /**
  * Holds the popup content container view, as well as the popup close button and the popup interaction gesture recognizer.
  */
 @interface LNPopupContentView : UIView
+
+/**
+ 
+ */
+@property (nonatomic) LNPopupPresentationStyle popupPresentationStyle;
+
+/**
+* A Boolean value that indicates whether the popup background should be dimmed during presentation.
+*/
+@property (nonatomic) BOOL dimsBackground;
+
+/**
+* A Boolean value that indicates whether the popup should
+*/
+@property (nonatomic) BOOL closesPopupOnBackgroundTap;
 
 /**
  * The gesture recognizer responsible for interactive opening and closing of the popup. (read-only)

@@ -23,28 +23,29 @@
 	self.view = [DemoPopupContentView new];
 }
 
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+- (void)dealloc
 {
-	[coordinator animateAlongsideTransitionInView:self.popupPresentationContainerViewController.view animation:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		[self _setPopupItemButtonsWithTraitCollection:newCollection];
-	} completion:nil];
 	
-	[super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
 }
 
-- (void)_setPopupItemButtonsWithTraitCollection:(UITraitCollection*)collection
+- (void)button:(UIBarButtonItem*)button
 {
-	UIBarButtonItem* play = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+	NSLog(@"✓");
+}
+
+- (void)_setPopupItemButtons
+{
+	UIBarButtonItem* play = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"play"] style:UIBarButtonItemStylePlain target:self action:@selector(button:)];
 	play.accessibilityLabel = NSLocalizedString(@"Play", @"");
 	play.accessibilityIdentifier = @"PlayButton";
 	play.accessibilityTraits = UIAccessibilityTraitButton;
 	
-	UIBarButtonItem* stop = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"stop"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+	UIBarButtonItem* stop = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"stop"] style:UIBarButtonItemStylePlain target:self action:@selector(button:)];
 	stop.accessibilityLabel = NSLocalizedString(@"Stop", @"");
 	stop.accessibilityIdentifier = @"StopButton";
 	stop.accessibilityTraits = UIAccessibilityTraitButton;
 	
-	UIBarButtonItem* next = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nextFwd"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+	UIBarButtonItem* next = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nextFwd"] style:UIBarButtonItemStylePlain target:self action:@selector(button:)];
 	next.accessibilityLabel = NSLocalizedString(@"Next Track", @"");
 	next.accessibilityIdentifier = @"NextButton";
 	next.accessibilityTraits = UIAccessibilityTraitButton;
@@ -59,6 +60,11 @@
 		self.popupItem.rightBarButtonItems = @[ play, next ];
 		self.popupItem.leftBarButtonItems = nil;
 	}
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+	NSLog(@"🤷‍♂️ %@", newCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular ? @"Regular" : @"Compact");
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -80,6 +86,8 @@
 											  [self.view.centerXAnchor constraintEqualToAnchor:customCloseButton.centerXAnchor],
 											  [self.view.centerYAnchor constraintEqualToAnchor:customCloseButton.centerYAnchor],
 											  ]];
+	
+	[self _setPopupItemButtons];
 }
 
 - (void)_closePopup

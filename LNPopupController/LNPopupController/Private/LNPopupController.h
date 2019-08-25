@@ -42,10 +42,9 @@
 - (void)openPopupAnimated:(BOOL)animated completion:(void(^)(void))completionBlock;
 - (void)closePopupAnimated:(BOOL)animated completion:(void(^)(void))completionBlock;
 - (void)dismissPopupBarAnimated:(BOOL)animated completion:(void(^)(void))completionBlock;
+- (void)_closePopupContent;
 
 - (void)_configurePopupBarFromBottomBar;
-
-+ (CGFloat)_statusBarHeightForView:(UIView*)view;
 
 - (CGRect)_frameForClosedPopupBar;
 

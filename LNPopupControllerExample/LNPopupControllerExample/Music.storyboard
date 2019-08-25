@@ -16,7 +16,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7rm-Dn-iNB" customClass="TabBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="yVZ-Nv-QXJ" kind="relationship" relationship="viewControllers" id="bbJ-PD-Lnf"/>
@@ -164,16 +164,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" verticalHuggingPriority="1000" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="3da-hP-THu">
-                                <rect key="frame" x="30" y="82" width="354" height="768"/>
+                                <rect key="frame" x="20" y="82" width="374" height="768"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demoAlbum" translatesAutoresizingMaskIntoConstraints="NO" id="z6U-ni-Nun">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="354"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="374"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="z6U-ni-Nun" secondAttribute="height" multiplier="1:1" id="bEk-Aq-7lL"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="y9y-0H-y1y">
-                                        <rect key="frame" x="0.0" y="406" width="354" height="52"/>
+                                        <rect key="frame" x="0.0" y="422" width="374" height="52"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SaE-MF-EZu">
                                                 <rect key="frame" x="0.0" y="0.0" width="115.66666666666667" height="52"/>
@@ -192,8 +192,8 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezn-OM-ME7">
-                                                <rect key="frame" x="328.66666666666669" y="13.666666666666687" width="25.333333333333314" height="24.666666666666671"/>
-                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="348.66666666666669" y="13.666666666666631" width="25.333333333333314" height="24.666666666666671"/>
+                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="ellipsis.circle.fill" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
@@ -210,23 +210,23 @@
                                         </constraints>
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tla-r7-MhO">
-                                        <rect key="frame" x="0.0" y="509.66666666666663" width="354" height="2.6666666666666856"/>
-                                        <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="progressTintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="trackTintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="521.66666666666663" width="374" height="2.6666666666666288"/>
+                                        <color key="tintColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="progressTintColor" systemColor="tertiaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="trackTintColor" systemColor="tertiaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                     </progressView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XdG-xi-F7z">
-                                        <rect key="frame" x="0.0" y="563.33333333333337" width="354" height="46"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XdG-xi-F7z">
+                                        <rect key="frame" x="0.0" y="571.33333333333337" width="374" height="46"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzz-jH-JK8" userLabel="Prev">
-                                                <rect key="frame" x="0.0" y="0.0" width="118" height="46"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="43" height="46"/>
                                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <state key="normal" image="backward.fill" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" weight="medium"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWB-Xh-Mmz" userLabel="Play">
-                                                <rect key="frame" x="118" y="0.0" width="118" height="46"/>
+                                                <rect key="frame" x="165.66666666666666" y="0.0" width="43" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Rr5-tX-gk0"/>
                                                 </constraints>
@@ -237,7 +237,7 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxZ-bx-TSy" userLabel="Next">
-                                                <rect key="frame" x="236" y="0.0" width="118" height="46"/>
+                                                <rect key="frame" x="331" y="0.0" width="43" height="46"/>
                                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <state key="normal" image="forward.fill" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="28" weight="medium"/>
@@ -253,29 +253,29 @@
                                         </constraints>
                                     </stackView>
                                     <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.75" minValue="0.0" maxValue="1" minimumValueImage="volDown" maximumValueImage="volUp" translatesAutoresizingMaskIntoConstraints="NO" id="tJO-MG-Efp">
-                                        <rect key="frame" x="-2" y="661" width="358" height="31"/>
-                                        <color key="tintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="-2" y="665" width="378" height="31"/>
+                                        <color key="tintColor" systemColor="tertiaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oZ7-Sb-wXF">
-                                        <rect key="frame" x="0.0" y="743" width="354" height="25"/>
+                                        <rect key="frame" x="0.0" y="743" width="374" height="25"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpN-KT-4q5">
-                                                <rect key="frame" x="0.0" y="0.0" width="118" height="25"/>
-                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.66666666666667" height="25"/>
+                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="quote.bubble" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTk-sA-jRD">
-                                                <rect key="frame" x="118" y="0.33333333333337123" width="118" height="24.333333333333332"/>
-                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="124.66666666666666" y="0.33333333333337123" width="124.66666666666666" height="24.333333333333332"/>
+                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="airplayaudio" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-0k-dfU">
-                                                <rect key="frame" x="236" y="1.6666666666666288" width="118" height="22"/>
-                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="249.33333333333329" y="1.6666666666666288" width="124.66666666666666" height="22"/>
+                                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="list.bullet" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
@@ -288,17 +288,18 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Tla-r7-MhO" firstAttribute="width" secondItem="3da-hP-THu" secondAttribute="width" id="2Is-zu-6Xr"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="374" id="HFt-lP-olf"/>
                                     <constraint firstItem="tJO-MG-Efp" firstAttribute="width" secondItem="3da-hP-THu" secondAttribute="width" id="KWY-EK-B1U"/>
                                     <constraint firstItem="XdG-xi-F7z" firstAttribute="width" secondItem="3da-hP-THu" secondAttribute="width" id="oB4-GT-INS"/>
                                     <constraint firstItem="oZ7-Sb-wXF" firstAttribute="width" secondItem="3da-hP-THu" secondAttribute="width" id="zyL-Ar-x6s"/>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="3da-hP-THu" firstAttribute="centerX" secondItem="95Y-tZ-jk4" secondAttribute="centerX" id="3nN-wA-bNw"/>
+                            <constraint firstItem="3da-hP-THu" firstAttribute="width" secondItem="95Y-tZ-jk4" secondAttribute="width" priority="999" constant="-40" id="7RQ-Xr-fx8"/>
                             <constraint firstItem="3da-hP-THu" firstAttribute="top" secondItem="95Y-tZ-jk4" secondAttribute="top" constant="38" id="JdD-KP-DtZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3da-hP-THu" secondAttribute="trailing" constant="10" id="bN8-mb-ZIg"/>
-                            <constraint firstItem="3da-hP-THu" firstAttribute="leading" secondItem="O4Z-D5-ZUb" secondAttribute="leadingMargin" constant="10" id="h6U-o3-6NH"/>
                             <constraint firstItem="95Y-tZ-jk4" firstAttribute="bottom" secondItem="3da-hP-THu" secondAttribute="bottom" constant="12" id="sES-2s-tNL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="95Y-tZ-jk4"/>
@@ -388,5 +389,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="IKD-oX-Nxq"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

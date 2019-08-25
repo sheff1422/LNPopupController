@@ -16,10 +16,16 @@
 
 + (void)load
 {
-	Class cls = NSClassFromString(@"UIFocusRingManager");
-	Method m1 = class_getClassMethod(cls, NSSelectorFromString(@"moveRingToFocusItem:"));
-	Method m2 = class_getClassMethod(NSObject.class, @selector(__ln_moveRingToFocusItem:));
-	method_exchangeImplementations(m1, m2);
+	@autoreleasepool
+	{
+#if ! LNPopupControllerEnforceStrictClean
+		//TODO: Hide
+		Class cls = NSClassFromString(@"UIFocusRingManager");
+		Method m1 = class_getClassMethod(cls, NSSelectorFromString(@"moveRingToFocusItem:"));
+		Method m2 = class_getClassMethod(NSObject.class, @selector(__ln_moveRingToFocusItem:));
+		method_exchangeImplementations(m1, m2);
+#endif
+	}
 }
 
 + (void)__ln_moveRingToFocusItem:(id)arg1

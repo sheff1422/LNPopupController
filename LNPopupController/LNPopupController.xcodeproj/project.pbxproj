@@ -43,8 +43,20 @@
 		397AFC021F1A21DD00E7D95C /* LNPopupLongPressGesutreRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AFC001F1A21DD00E7D95C /* LNPopupLongPressGesutreRecognizer.m */; };
 		397AFC051F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 397AFC031F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.h */; };
 		397AFC061F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 397AFC041F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.m */; };
+		3984CB0823142884001A0538 /* _LNOverCurrentContextPopupPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3984CB0623142884001A0538 /* _LNOverCurrentContextPopupPresentationController.h */; };
+		3984CB0923142884001A0538 /* _LNOverCurrentContextPopupPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3984CB0723142884001A0538 /* _LNOverCurrentContextPopupPresentationController.m */; };
 		39A9249A1B58530A003C1C19 /* LNPopupController.h in Headers */ = {isa = PBXBuildFile; fileRef = 39A924991B5852ED003C1C19 /* LNPopupController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39ADC04F2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ADC04D2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.h */; };
+		39ADC0502316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ADC04E2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.m */; };
+		39B737292314189E0032661E /* _LNFullHeightPopupPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B737272314189E0032661E /* _LNFullHeightPopupPresentationController.h */; };
+		39B7372A2314189E0032661E /* _LNFullHeightPopupPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B737282314189E0032661E /* _LNFullHeightPopupPresentationController.m */; };
+		39C32FC52316948800EF9E66 /* _LNPopupSheetPresentationController_.h in Headers */ = {isa = PBXBuildFile; fileRef = 39C32FC32316948800EF9E66 /* _LNPopupSheetPresentationController_.h */; };
+		39C32FC62316948800EF9E66 /* _LNPopupSheetPresentationController_.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C32FC42316948800EF9E66 /* _LNPopupSheetPresentationController_.m */; };
 		39C81A321B642DDD00D3B645 /* LNPopupItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 394A85B71B6304F5004FFC61 /* LNPopupItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39D444CD2313B76800281618 /* _LNPopupPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 39D444CB2313B76800281618 /* _LNPopupPresentationController.h */; };
+		39D444CE2313B76800281618 /* _LNPopupPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D444CC2313B76800281618 /* _LNPopupPresentationController.m */; };
+		39D444D12313B7F000281618 /* _LNFullScreenPopupPresentationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 39D444CF2313B7F000281618 /* _LNFullScreenPopupPresentationController.h */; };
+		39D444D22313B7F000281618 /* _LNFullScreenPopupPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D444D02313B7F000281618 /* _LNFullScreenPopupPresentationController.m */; };
 		39E7A604200B5157007AF3AD /* _LNPopupBase64Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E7A602200B5157007AF3AD /* _LNPopupBase64Utils.h */; };
 		39E7A605200B5157007AF3AD /* _LNPopupBase64Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E7A603200B5157007AF3AD /* _LNPopupBase64Utils.m */; };
 /* End PBXBuildFile section */
@@ -89,7 +101,19 @@
 		397AFC001F1A21DD00E7D95C /* LNPopupLongPressGesutreRecognizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LNPopupLongPressGesutreRecognizer.m; sourceTree = "<group>"; };
 		397AFC031F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LNPopupInteractionPanGestureRecognizer.h; sourceTree = "<group>"; };
 		397AFC041F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LNPopupInteractionPanGestureRecognizer.m; sourceTree = "<group>"; };
+		3984CB0623142884001A0538 /* _LNOverCurrentContextPopupPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNOverCurrentContextPopupPresentationController.h; sourceTree = "<group>"; };
+		3984CB0723142884001A0538 /* _LNOverCurrentContextPopupPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNOverCurrentContextPopupPresentationController.m; sourceTree = "<group>"; };
 		39A924991B5852ED003C1C19 /* LNPopupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LNPopupController.h; sourceTree = "<group>"; };
+		39ADC04D2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNLegacyOSSheetPopupPresentationController.h; sourceTree = "<group>"; };
+		39ADC04E2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNLegacyOSSheetPopupPresentationController.m; sourceTree = "<group>"; };
+		39B737272314189E0032661E /* _LNFullHeightPopupPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNFullHeightPopupPresentationController.h; sourceTree = "<group>"; };
+		39B737282314189E0032661E /* _LNFullHeightPopupPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNFullHeightPopupPresentationController.m; sourceTree = "<group>"; };
+		39C32FC32316948800EF9E66 /* _LNPopupSheetPresentationController_.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNPopupSheetPresentationController_.h; sourceTree = "<group>"; };
+		39C32FC42316948800EF9E66 /* _LNPopupSheetPresentationController_.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNPopupSheetPresentationController_.m; sourceTree = "<group>"; };
+		39D444CB2313B76800281618 /* _LNPopupPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNPopupPresentationController.h; sourceTree = "<group>"; };
+		39D444CC2313B76800281618 /* _LNPopupPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNPopupPresentationController.m; sourceTree = "<group>"; };
+		39D444CF2313B7F000281618 /* _LNFullScreenPopupPresentationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNFullScreenPopupPresentationController.h; sourceTree = "<group>"; };
+		39D444D02313B7F000281618 /* _LNFullScreenPopupPresentationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNFullScreenPopupPresentationController.m; sourceTree = "<group>"; };
 		39DB52E51B5823330061C589 /* LNPopupController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LNPopupController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39E7A602200B5157007AF3AD /* _LNPopupBase64Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _LNPopupBase64Utils.h; sourceTree = "<group>"; };
 		39E7A603200B5157007AF3AD /* _LNPopupBase64Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _LNPopupBase64Utils.m; sourceTree = "<group>"; };
@@ -126,6 +150,7 @@
 				3947E1A41B61CD650001178B /* LNPopupBar.m */,
 				39109DA11DD8A305004B5FAB /* LNPopupCloseButton+Private.h */,
 				3947E1A81B61CDA40001178B /* LNPopupCloseButton.m */,
+				39D444CA2313B74000281618 /* PresentationControllers */,
 				3934DEA6230FFD92006A61A3 /* LNPopupContentViewController.h */,
 				3934DEA7230FFD92006A61A3 /* LNPopupContentViewController.m */,
 				3947E1B01B61CE4A0001178B /* LNPopupController.h */,
@@ -155,6 +180,25 @@
 				397AFC041F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.m */,
 			);
 			name = GestureRecognizers;
+			sourceTree = "<group>";
+		};
+		39D444CA2313B74000281618 /* PresentationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				39D444CB2313B76800281618 /* _LNPopupPresentationController.h */,
+				39D444CC2313B76800281618 /* _LNPopupPresentationController.m */,
+				39D444CF2313B7F000281618 /* _LNFullScreenPopupPresentationController.h */,
+				39D444D02313B7F000281618 /* _LNFullScreenPopupPresentationController.m */,
+				39B737272314189E0032661E /* _LNFullHeightPopupPresentationController.h */,
+				39B737282314189E0032661E /* _LNFullHeightPopupPresentationController.m */,
+				3984CB0623142884001A0538 /* _LNOverCurrentContextPopupPresentationController.h */,
+				3984CB0723142884001A0538 /* _LNOverCurrentContextPopupPresentationController.m */,
+				39C32FC32316948800EF9E66 /* _LNPopupSheetPresentationController_.h */,
+				39C32FC42316948800EF9E66 /* _LNPopupSheetPresentationController_.m */,
+				39ADC04D2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.h */,
+				39ADC04E2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.m */,
+			);
+			path = PresentationControllers;
 			sourceTree = "<group>";
 		};
 		39DB52DB1B5823330061C589 = {
@@ -205,20 +249,26 @@
 				39C81A321B642DDD00D3B645 /* LNPopupItem.h in Headers */,
 				3947E1A11B61CD1F0001178B /* UIViewController+LNPopupSupport.h in Headers */,
 				3947E1B21B61CE4A0001178B /* LNPopupController.h in Headers */,
+				39D444D12313B7F000281618 /* _LNFullScreenPopupPresentationController.h in Headers */,
+				39B737292314189E0032661E /* _LNFullHeightPopupPresentationController.h in Headers */,
 				3947E1BA1B6300370001178B /* LNPopupBar+Private.h in Headers */,
 				397AFC051F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.h in Headers */,
 				39E7A604200B5157007AF3AD /* _LNPopupBase64Utils.h in Headers */,
 				39314A521B6AE7A400574D3C /* MarqueeLabel.h in Headers */,
 				391481BB1DCFA514002416D1 /* LNChevronView.h in Headers */,
 				39599BAD1E02CDF4008EE386 /* LNPopupCustomBarViewController+Private.h in Headers */,
+				39C32FC52316948800EF9E66 /* _LNPopupSheetPresentationController_.h in Headers */,
 				3934A9F51DD4C935004B073A /* LNPopupController.pch in Headers */,
 				390F246122AC310A007E0CAE /* NSObject+AltKVC.h in Headers */,
 				3934DEA8230FFD92006A61A3 /* LNPopupContentViewController.h in Headers */,
 				397AFBFB1F1A1ED200E7D95C /* LNForwardingDelegate.h in Headers */,
+				39D444CD2313B76800281618 /* _LNPopupPresentationController.h in Headers */,
+				39ADC04F2316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.h in Headers */,
 				39222ADB1F1A1C5800388E06 /* LNPopupOpenTapGesutreRecognizer.h in Headers */,
 				397AFC011F1A21DD00E7D95C /* LNPopupLongPressGesutreRecognizer.h in Headers */,
 				394A85C11B630992004FFC61 /* _LNWeakRef.h in Headers */,
 				394A85BD1B6306AE004FFC61 /* LNPopupItem+Private.h in Headers */,
+				3984CB0823142884001A0538 /* _LNOverCurrentContextPopupPresentationController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,18 +346,24 @@
 				397AFC021F1A21DD00E7D95C /* LNPopupLongPressGesutreRecognizer.m in Sources */,
 				39222ADC1F1A1C5800388E06 /* LNPopupOpenTapGesutreRecognizer.m in Sources */,
 				3947E1AA1B61CDA40001178B /* LNPopupCloseButton.m in Sources */,
+				39D444CE2313B76800281618 /* _LNPopupPresentationController.m in Sources */,
 				390F246222AC310A007E0CAE /* NSObject+AltKVC.m in Sources */,
+				3984CB0923142884001A0538 /* _LNOverCurrentContextPopupPresentationController.m in Sources */,
 				394A85C21B630992004FFC61 /* _LNWeakRef.m in Sources */,
 				394A85BA1B6304F5004FFC61 /* LNPopupItem.m in Sources */,
 				3947E1B31B61CE4A0001178B /* LNPopupController.m in Sources */,
+				39D444D22313B7F000281618 /* _LNFullScreenPopupPresentationController.m in Sources */,
 				397AFBFC1F1A1ED200E7D95C /* LNForwardingDelegate.m in Sources */,
 				39314A531B6AE7A400574D3C /* MarqueeLabel.m in Sources */,
 				391481BA1DCFA514002416D1 /* LNChevronView.m in Sources */,
 				3947E1A61B61CD650001178B /* LNPopupBar.m in Sources */,
+				39B7372A2314189E0032661E /* _LNFullHeightPopupPresentationController.m in Sources */,
 				394A85C91B63FE52004FFC61 /* UIViewController+LNPopupSupportPrivate.m in Sources */,
 				397AFC061F1A229400E7D95C /* LNPopupInteractionPanGestureRecognizer.m in Sources */,
+				39ADC0502316D2B1002C1939 /* _LNLegacyOSSheetPopupPresentationController.m in Sources */,
 				3947E1A21B61CD1F0001178B /* UIViewController+LNPopupSupport.m in Sources */,
 				39599BAB1E02CD65008EE386 /* LNPopupCustomBarViewController.m in Sources */,
+				39C32FC62316948800EF9E66 /* _LNPopupSheetPresentationController_.m in Sources */,
 				3934DEA9230FFD92006A61A3 /* LNPopupContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

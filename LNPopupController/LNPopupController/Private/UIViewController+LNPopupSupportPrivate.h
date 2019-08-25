@@ -13,12 +13,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 void _LNPopupSupportSetPopupInsetsForViewController(UIViewController* controller, BOOL layout, UIEdgeInsets popupEdgeInsets);
+UIEdgeInsets _ln_LNPopupSafeAreas(id self);
 
 @interface _LNPopupBottomBarSupport : UIView @end
 
 @interface UIViewController (LNPopupSupportPrivate)
 
-- (nullable UIViewController*)_ln_common_childViewControllerForStatusBarStyle;
+- (nullable UIPresentationController*)nonMemoryLeakingPresentationController;
 
 @property (nonatomic, strong, readonly, getter=_ln_popupController) LNPopupController* ln_popupController;
 - (LNPopupController*)_ln_popupController_nocreate;
@@ -26,12 +27,12 @@ void _LNPopupSupportSetPopupInsetsForViewController(UIViewController* controller
 @property (nullable, nonatomic, strong, readonly) UIViewController* popupContentViewController;
 
 @property (nonnull, nonatomic, strong, readonly, getter=_ln_bottomBarSupport) _LNPopupBottomBarSupport* bottomBarSupport;
-- (nullable _LNPopupBottomBarSupport *)_ln_bottomBarSupport_nocreate;
+- (nullable _LNPopupBottomBarSupport *)_ln_bottomBarSupportNoCreate;
 
 - (BOOL)_isContainedInPopupController;
 
-- (nullable UIView *)bottomDockingViewForPopup_nocreateOrDeveloper;
-- (nonnull UIView *)bottomDockingViewForPopup_internalOrDeveloper;
+- (nullable UIView *)bottomDockingViewForPopup_developerOrBottomBarSupportNoCreate;
+- (nonnull UIView *)bottomDockingViewForPopup_developerOrBottomBarSupport;
 
 - (CGRect)defaultFrameForBottomDockingView_internal;
 - (CGRect)defaultFrameForBottomDockingView_internalOrDeveloper;

@@ -6,15 +6,27 @@
 //  Copyright © 2019 Leo Natan. All rights reserved.
 //
 
+#import "LNPopupController.h"
 #import "LNPopupContentViewController.h"
 #import "UIViewController+LNPopupSupportPrivate.h"
+#import "LNPopupCloseButton+Private.h"
+#import "_LNFullScreenPopupPresentationController.h"
+#import "_LNFullHeightPopupPresentationController.h"
+#import "_LNOverCurrentContextPopupPresentationController.h"
+#import "_LNLegacyOSSheetPopupPresentationController.h"
+#import "_LNPopupSheetPresentationController_.h"
+
+LNPopupCloseButtonStyle _LNPopupResolveCloseButtonStyleFromCloseButtonStyle(LNPopupCloseButtonStyle style)
+{
+	LNPopupCloseButtonStyle rv = style;
+	if(rv == LNPopupCloseButtonStyleDefault)
+	{
+		rv = LNPopupCloseButtonStyleChevron;
+	}
+	return rv;
+}
 
 @implementation LNPopupContentView
-
-- (void)didMoveToWindow
-{
-	
-}
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame
 {
@@ -34,6 +46,11 @@
 	}
 	
 	return self;
+}
+
+- (void)dealloc
+{
+	
 }
 
 - (void)layoutSubviews
@@ -105,13 +122,39 @@
 
 @end
 
-@interface LNPopupContentViewController () <UIAdaptivePresentationControllerDelegate>
-
-
-
-@end
+@interface LNPopupContentViewController () <UIViewControllerTransitioningDelegate, LNPopupPresentationControllerDelegate> @end
 
 @implementation LNPopupContentViewController
+{
+	__weak LNPopupController* _popupController;
+	
+	NSLayoutConstraint* _popupCloseButtonTopConstraint;
+	NSLayoutConstraint* _popupCloseButtonHorizontalConstraint;
+	
+	_LNPopupPresentationController* _currentPresentationController;
+}
+
+- (instancetype)initWithPopupController:(LNPopupController*)popupController
+{
+	self = [super init];
+	
+	if(self)
+	{
+		_popupController = popupController;
+		self.transitioningDelegate = self;
+		self.modalPresentationStyle = UIModalPresentationCustom;
+		
+		self.popupContentView.layer.masksToBounds = YES;
+		[self.popupContentView addObserver:self forKeyPath:@"popupCloseButtonStyle" options:NSKeyValueObservingOptionInitial context:NULL];
+	}
+	
+	return self;
+}
+
+- (void)dealloc
+{
+	[self.popupContentView removeObserver:self forKeyPath:@"popupCloseButtonStyle"];
+}
 
 - (LNPopupContentView *)popupContentView
 {
@@ -121,137 +164,145 @@
 - (void)loadView
 {
 	self.view = [LNPopupContentView new];
+	self.view.backgroundColor = UIColor.clearColor;
 }
 
-- (void)setBottomBar:(UIView *)trackedBar
+#pragma mark Presentation, animation and interaction
+
+- (void)currentPresentationDidEnd
 {
-	_bottomBar = trackedBar;
+	_currentPresentationController = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source
 {
-	[super viewWillAppear:animated];
-	
-	UIView* bottomBarView;
-	UIView* popupBarView;
-	
-	if(@available(iOS 12, *))
+	if(_currentPresentationController != nil)
 	{
-		bottomBarView = [NSClassFromString(@"_UIPortalView") new];
-		[bottomBarView setValue:self.bottomBar forKey:@"sourceView"];
-		[bottomBarView setValue:@YES forKey:@"allowsBackdropGroups"];
-		[bottomBarView setValue:@YES forKey:@"matchesAlpha"];
-		[bottomBarView setValue:@YES forKey:@"hidesSourceView"];
-		
-		popupBarView = [NSClassFromString(@"_UIPortalView") new];
-		[popupBarView setValue:self.popupBar forKey:@"sourceView"];
-		[popupBarView setValue:@YES forKey:@"allowsBackdropGroups"];
-		[popupBarView setValue:@YES forKey:@"matchesAlpha"];
-		[popupBarView setValue:@YES forKey:@"hidesSourceView"];
-	}
-	else
-	{
-		
+		return _currentPresentationController;
 	}
 	
-	[self.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		CGRect bottomBarFrame = self.bottomBar.frame;
-		CGFloat bottomBarHeight = self.bottomBar.superview.bounds.size.height - bottomBarFrame.origin.y;
-		bottomBarFrame.origin.y = self.view.window.bounds.size.height - bottomBarHeight;
-		
-		CGRect popupBarFrame = self.popupBar.frame;
-		CGFloat popupBarHeight = self.popupBar.superview.bounds.size.height - popupBarFrame.origin.y;
-		popupBarFrame.origin.y = self.view.window.bounds.size.height - popupBarHeight;
-		
-		[UIView performWithoutAnimation:^{
-			[bottomBarView setFrame:bottomBarFrame];
-			[popupBarView setFrame:popupBarFrame];
-		}];
-		
-		[context.containerView addSubview:bottomBarView];
-		[context.containerView addSubview:popupBarView];
-		
-		bottomBarFrame.origin.y = self.view.window.bounds.size.height;
-		[bottomBarView setFrame:bottomBarFrame];
-		
-		
-	} completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		[bottomBarView removeFromSuperview];
-	}];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-
-	id view;
-
-	if(@available(iOS 12, *))
-	{
-		view = [NSClassFromString(@"_UIPortalView") new];
-		[view setValue:self.bottomBar forKey:@"sourceView"];
-		[view setValue:@YES forKey:@"allowsBackdropGroups"];
-		[view setValue:@YES forKey:@"matchesAlpha"];
-		[view setValue:@YES forKey:@"hidesSourceView"];
-	}
-	else
-	{
-		
-	}
-
-	void (^animateBlock)(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) = ^ (id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		CGRect frame = self.bottomBar.frame;
-		CGFloat height = self.bottomBar.superview.bounds.size.height - frame.origin.y;
-		frame.origin.y = self.view.window.bounds.size.height - height;
-		[UIView performWithoutAnimation:^{
-			CGRect from = frame;
-			from.origin.y = self.view.window.bounds.size.height;
-			[view setFrame:from];
-		}];
-
-		[context.containerView addSubview:view];
-		
-		[view setFrame:frame];
-	};
+	Class targetClass;
 	
-	void (^endBlock)(BOOL) = ^(BOOL finished) {
-		[view removeFromSuperview];
-	};
-	
-	[self.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		if(context.initiallyInteractive == NO)
-		{
-			animateBlock(context);
-			return;
-		}
-		
-		[self.transitionCoordinator notifyWhenInteractionChangesUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-			if(context.cancelled == YES)
+	switch (self.popupPresentationStyle) {
+		case LNPopupPresentationStyleFullScreen:
+			targetClass = _LNFullScreenPopupPresentationController.class;
+			break;
+		case LNPopupPresentationStyleFullHeight:
+			targetClass = _LNFullHeightPopupPresentationController.class;
+			break;
+		case LNPopupPresentationStyleOverCurrentContext:
+			targetClass = _LNOverCurrentContextPopupPresentationController.class;
+			break;
+		case LNPopupPresentationStyleSheet:
+#if ! LNPopupControllerEnforceStrictClean
+			if(@available(iOS 13.0, *))
 			{
-				return;
+				UIPresentationController* pc = [presenting ?: source nonMemoryLeakingPresentationController];
+				if([NSStringFromClass(pc.class) containsString:@"Form"])
+				{
+					targetClass = _LNPopupFormSheetPresentationController;
+				}
+				else
+				{
+					targetClass = _LNPopupPageSheetPresentationController;
+				}
 			}
+			else
+			{
+#endif
+				targetClass = _LNLegacyOSSheetPopupPresentationController.class;
+#if ! LNPopupControllerEnforceStrictClean
+			}
+#endif
 			
-			double remaining = context.transitionDuration * (1.0 - context.percentComplete);
-			
-			[UIView animateWithDuration:MAX(0.3, remaining) delay:0.0 usingSpringWithDamping:500.0 initialSpringVelocity:0.0 options:0 animations: ^ {
-				animateBlock(context);
-			} completion:endBlock];
-		}];
-	} completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-		if(context.initiallyInteractive == YES)
-		{
-			return;
-		}
-		
-		endBlock(YES);
-	}];
+			break;
+		default:
+			targetClass = _LNFullHeightPopupPresentationController.class;
+			break;
+	}
+	
+	_currentPresentationController = [[targetClass alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+	_currentPresentationController.popupPresentationControllerDelegate = self;
+	
+	return _currentPresentationController;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
 {
-	[super viewDidDisappear:animated];
+	if([_currentPresentationController isKindOfClass:_LNPopupPresentationController.class] == NO)
+	{
+		return nil;
+	}
 	
-	NSLog(@"😂 %@", @([self.bottomBar.window convertRect:[[self.bottomBar valueForKey:@"backgroundView"] bounds] fromView:[self.bottomBar valueForKey:@"backgroundView"]]));
+	return (id)_currentPresentationController;
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed;
+{
+	if([_currentPresentationController isKindOfClass:_LNPopupPresentationController.class] == NO)
+	{
+		return nil;
+	}
+	
+	return (id)_currentPresentationController;
+}
+
+#pragma mark Popup close button
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+	if([keyPath isEqualToString:@"popupCloseButtonStyle"] && object == self.popupContentView)
+	{
+		[UIView performWithoutAnimation:^{
+			[self _setUpCloseButtonForPopupContentView];
+		}];
+	}
+}
+
+- (void)_setUpCloseButtonForPopupContentView
+{
+	[self.popupContentView.popupCloseButton removeFromSuperview];
+	self.popupContentView.popupCloseButton = nil;
+
+	LNPopupCloseButtonStyle buttonStyle = _LNPopupResolveCloseButtonStyleFromCloseButtonStyle(self.popupContentView.popupCloseButtonStyle);
+	
+	if(buttonStyle != LNPopupCloseButtonStyleNone)
+	{
+		self.popupContentView.popupCloseButton = [[LNPopupCloseButton alloc] initWithStyle:buttonStyle];
+		self.popupContentView.popupCloseButton.translatesAutoresizingMaskIntoConstraints = NO;
+		[self.popupContentView.popupCloseButton addTarget:_popupController action:@selector(_closePopupContent) forControlEvents:UIControlEventTouchUpInside];
+		[self.popupContentView addSubview:self.popupContentView.popupCloseButton];
+		
+		[self.popupContentView.popupCloseButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+		[self.popupContentView.popupCloseButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		[self.popupContentView.popupCloseButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+		[self.popupContentView.popupCloseButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		
+		_popupCloseButtonTopConstraint = [self.popupContentView.popupCloseButton.topAnchor constraintEqualToAnchor:self.popupContentView.safeAreaLayoutGuide.topAnchor constant:buttonStyle == LNPopupCloseButtonStyleRound ? 12 : 8];
+		
+		if(buttonStyle == LNPopupCloseButtonStyleRound)
+		{
+			_popupCloseButtonHorizontalConstraint = [self.popupContentView.popupCloseButton.leadingAnchor constraintEqualToAnchor:self.popupContentView.contentView.leadingAnchor constant:12];
+		}
+		else
+		{
+			_popupCloseButtonHorizontalConstraint = [self.popupContentView.popupCloseButton.centerXAnchor constraintEqualToAnchor:self.popupContentView.contentView.centerXAnchor];
+		}
+		
+		[NSLayoutConstraint activateConstraints:@[_popupCloseButtonTopConstraint, _popupCloseButtonHorizontalConstraint]];
+	}
+}
+
+#pragma mark View Controller Forwarding
+
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+	return YES;
+}
+
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods
+{
+	return YES;
 }
 
 - (UIViewController *)childViewControllerForStatusBarStyle
@@ -272,6 +323,16 @@
 - (UIViewController *)childViewControllerForScreenEdgesDeferringSystemGestures
 {
 	return self.childViewControllers.firstObject;
+}
+
+- (UIViewController *)childViewControllerForUserInterfaceStyle
+{
+	return self.childViewControllers.firstObject;
+}
+
+- (BOOL)isModalInPresentation
+{
+	return self.childViewControllers.firstObject.isModalInPresentation;
 }
 
 @end

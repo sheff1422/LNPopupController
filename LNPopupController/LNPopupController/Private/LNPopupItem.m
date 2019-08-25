@@ -21,8 +21,8 @@ static NSArray* __keys;
 
 +(void)load
 {
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
+	@autoreleasepool
+	{
 		__keys = @[
 			NSStringFromSelector(@selector(title)),
 			NSStringFromSelector(@selector(subtitle)),
@@ -36,7 +36,7 @@ static NSArray* __keys;
 			NSStringFromSelector(@selector(accessibilityProgressLabel)),
 			NSStringFromSelector(@selector(accessibilityProgressValue))
 		];
-	});
+	}
 }
 
 - (instancetype)init

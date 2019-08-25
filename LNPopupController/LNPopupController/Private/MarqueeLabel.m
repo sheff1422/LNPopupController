@@ -769,13 +769,13 @@ CGPoint MLOffsetCGPoint(CGPoint point, CGFloat offset);
             adjustedColors = @[(trailingFadeNeeded ? transparent : opaque),
                                opaque,
                                opaque,
-                               opaque];
+                               (trailingFadeNeeded ? transparent : opaque)];
             break;
             
         default:
             // MLContinuous
             // MLLeftRight
-            adjustedColors = @[opaque,
+            adjustedColors = @[(trailingFadeNeeded ? transparent : opaque),
                                opaque,
                                opaque,
                                (trailingFadeNeeded ? transparent : opaque)];

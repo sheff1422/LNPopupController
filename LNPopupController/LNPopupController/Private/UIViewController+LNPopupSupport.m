@@ -14,7 +14,6 @@
 static const void* _LNPopupItemKey = &_LNPopupItemKey;
 static const void* _LNPopupControllerKey = &_LNPopupControllerKey;
 const void* _LNPopupPresentationContainerViewControllerKey = &_LNPopupPresentationContainerViewControllerKey;
-const void* _LNPopupBarPreviewingDelegateKey = &_LNPopupBarPreviewingDelegateKey;
 const void* _LNPopupContentViewControllerKey = &_LNPopupContentViewControllerKey;
 static const void* _LNPopupInteractionStyleKey = &_LNPopupInteractionStyleKey;
 static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
@@ -28,9 +27,33 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 @end
 #pragma clang diagnostic pop
 
+@interface UIViewController ()
+
+#if ! LNPopupControllerEnforceStrictClean
+//TODO: Hide
+- (id)_existingPresentationControllerImmediate:(_Bool)arg1 effective:(_Bool)arg2;
+#endif
+
+@end
+
 @implementation UIViewController (LNPopupSupport)
 
-- (void)presentPopupBarWithContentViewController:(UIViewController*)controller openPopup:(BOOL)openPopup animated:(BOOL)animated completion:(nullable void(^)(void))completionBlock;
+- (UIPresentationController*)nonMemoryLeakingPresentationController
+{
+#if ! LNPopupControllerEnforceStrictClean
+	//TODO: Hide
+	return [self _existingPresentationControllerImmediate:NO effective:NO];
+#else
+	NSString* selector = [NSString stringWithFormat:@"_%@", NSStringFromSelector(@selector(presentationController))];
+	
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+	return [self performSelector:NSSelectorFromString(selector)];
+#pragma clang diagnostic pop
+#endif
+}
+
+- (void)presentPopupBarWithContentViewController:(UIViewController*)controller openPopup:(BOOL)openPopup animated:(BOOL)animated completion:(nullable __attribute__((noescape)) void(^)(void))completionBlock;
 {
 	if(controller == nil)
 	{
@@ -43,22 +66,22 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 	[self._ln_popupController presentPopupBarAnimated:animated openPopup:openPopup completion:completionBlock];
 }
 
-- (void)presentPopupBarWithContentViewController:(UIViewController*)controller animated:(BOOL)animated completion:(void(^)(void))completionBlock
+- (void)presentPopupBarWithContentViewController:(UIViewController*)controller animated:(BOOL)animated completion:( __attribute__((noescape)) void(^)(void))completionBlock
 {
 	[self presentPopupBarWithContentViewController:controller openPopup:NO animated:animated completion:completionBlock];
 }
 
-- (void)openPopupAnimated:(BOOL)animated completion:(void(^)(void))completionBlock
+- (void)openPopupAnimated:(BOOL)animated completion:(__attribute__((noescape)) void(^)(void))completionBlock
 {
 	[self._ln_popupController_nocreate openPopupAnimated:animated completion:completionBlock];
 }
 
-- (void)closePopupAnimated:(BOOL)animated completion:(void(^)(void))completionBlock
+- (void)closePopupAnimated:(BOOL)animated completion:(__attribute__((noescape)) void(^)(void))completionBlock
 {
 	[self._ln_popupController_nocreate closePopupAnimated:animated completion:completionBlock];
 }
 
-- (void)dismissPopupBarAnimated:(BOOL)animated completion:(void(^)(void))completionBlock
+- (void)dismissPopupBarAnimated:(BOOL)animated completion:(__attribute__((noescape)) void(^)(void))completionBlock
 {
 	[self._ln_popupController_nocreate dismissPopupBarAnimated:animated completion:^{
 		//Cleanup
@@ -164,24 +187,6 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 	return self.view;
 }
 
-#if ! TARGET_OS_MACCATALYST
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-- (id<LNPopupBarPreviewingDelegate>)popupBarPreviewingDelegate
-{
-	return [(_LNWeakRef*)objc_getAssociatedObject(self, _LNPopupBarPreviewingDelegateKey) object];
-}
-
-- (void)setPopupBarPreviewingDelegate:(id<LNPopupBarPreviewingDelegate>)popupBarPreviewingDelegate
-{
-	[self willChangeValueForKey:@"popupBarPreviewingDelegate"];
-	_LNWeakRef* weakRef = [_LNWeakRef refWithObject:popupBarPreviewingDelegate];
-	objc_setAssociatedObject(self, _LNPopupBarPreviewingDelegateKey, weakRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-	[self didChangeValueForKey:@"popupBarPreviewingDelegate"];
-}
-#pragma clang diagnostic pop
-#endif
-
 @end
 
 @implementation UIViewController (LNCustomContainerPopupSupport)
@@ -199,18 +204,18 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 	return rv;
 }
 
-- (_LNPopupBottomBarSupport *)_ln_bottomBarSupport_nocreate
+- (_LNPopupBottomBarSupport *)_ln_bottomBarSupportNoCreate
 {
 	return objc_getAssociatedObject(self, _LNPopupBottomBarSupportKey);
 }
 
 - (_LNPopupBottomBarSupport *)_ln_bottomBarSupport
 {
-	_LNPopupBottomBarSupport* rv = [self _ln_bottomBarSupport_nocreate];
+	_LNPopupBottomBarSupport* rv = [self _ln_bottomBarSupportNoCreate];
 	
 	if(rv == nil)
 	{
-		rv = [[_LNPopupBottomBarSupport alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 0)];
+		rv = [[_LNPopupBottomBarSupport alloc] initWithFrame:[self defaultFrameForBottomDockingView_internal]];
 		
 		objc_setAssociatedObject(self, _LNPopupBottomBarSupportKey, rv, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		
@@ -220,13 +225,12 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 	return rv;
 }
 
-
-- (nullable UIView *)bottomDockingViewForPopup_nocreateOrDeveloper
+- (nullable UIView *)bottomDockingViewForPopup_developerOrBottomBarSupportNoCreate
 {
-	return self.bottomDockingViewForPopupBar ?: self._ln_bottomBarSupport_nocreate;
+	return self.bottomDockingViewForPopupBar ?: self._ln_bottomBarSupportNoCreate;
 }
 
-- (nonnull UIView *)bottomDockingViewForPopup_internalOrDeveloper
+- (nonnull UIView *)bottomDockingViewForPopup_developerOrBottomBarSupport
 {
 	return self.bottomDockingViewForPopupBar ?: self._ln_bottomBarSupport;
 }
@@ -238,12 +242,7 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 
 - (UIEdgeInsets)insetsForBottomDockingView
 {
-	if([NSStringFromClass(self.presentationController.class) containsString:@"Preview"])
-	{
-		return UIEdgeInsetsZero;
-	}
-	
-	return UIEdgeInsetsMake(0, 0, self.view.superview.safeAreaInsets.bottom, 0);
+	return UIEdgeInsetsZero;
 }
 
 - (CGRect)defaultFrameForBottomDockingView
@@ -253,7 +252,7 @@ static const void* _LNPopupBottomBarSupportKey = &_LNPopupBottomBarSupportKey;
 
 - (CGRect)defaultFrameForBottomDockingView_internal
 {
-	return CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 0);
+	return CGRectMake(0, self.view.bounds.size.height - (self.view.safeAreaInsets.bottom - _ln_LNPopupSafeAreas(self).bottom), self.view.bounds.size.width, (self.view.safeAreaInsets.bottom - _ln_LNPopupSafeAreas(self).bottom));
 }
 
 - (CGRect)defaultFrameForBottomDockingView_internalOrDeveloper

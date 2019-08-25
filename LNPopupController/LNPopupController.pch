@@ -9,7 +9,7 @@
 #ifndef LNPopupController_pch
 #define LNPopupController_pch
 
-//#define LNPopupControllerEnforceStrictClean
+//#define LNPopupControllerEnforceStrictClean 1
 
 #define MarqueeLabel __MarqueeLabel
 #define MarqueeType __MarqueeType
@@ -27,5 +27,19 @@
 #define LNChevronViewStateFlat __LNChevronViewStateFlat
 #define LNChevronViewStateDown __LNChevronViewStateDown
 
+#if DEBUG
+
+@import UIKit;
+@interface UIView ()
+
+- (NSString*)recursiveDescription;
+
+@end
+
+#endif
+
+@import ObjectiveC;
+
+#define unavailable(...) @available(__VA_ARGS__)) { } else if(YES
 
 #endif /* LNPopupController_pch */
