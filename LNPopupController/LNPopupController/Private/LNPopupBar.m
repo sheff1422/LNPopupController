@@ -234,6 +234,7 @@ static inline __attribute__((always_inline)) UIBlurEffectStyle _LNBlurEffectStyl
 		[_contentView addSubview:_toolbar];
 		
 		_titlesView = [[UIView alloc] initWithFrame:self.bounds];
+        _titlesView.userInteractionEnabled = NO;
 		_titlesView.autoresizingMask = UIViewAutoresizingNone;
 		_titlesView.accessibilityTraits = UIAccessibilityTraitButton;
 		_titlesView.isAccessibilityElement = YES;
