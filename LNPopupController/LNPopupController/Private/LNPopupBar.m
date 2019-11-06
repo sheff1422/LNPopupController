@@ -94,7 +94,7 @@
 
 @interface MarqueeLabel () <__MarqueeLabelType> @end
 
-const CGFloat LNPopupBarHeightCompact = 40.0;
+const CGFloat LNPopupBarHeightCompact = 64.0;
 const CGFloat LNPopupBarHeightProminent = 64.0;
 const CGFloat LNPopupBarProminentImageWidth = 48.0;
 
