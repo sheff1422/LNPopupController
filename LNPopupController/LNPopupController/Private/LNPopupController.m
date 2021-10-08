@@ -16,6 +16,7 @@
 #import "NSObject+AltKVC.h"
 @import ObjectiveC;
 
+void __LNPopupControllerOutOfWindowHierarchy(void);
 void __LNPopupControllerOutOfWindowHierarchy()
 {
 }
