@@ -214,7 +214,7 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 		}
 		
 		_inheritsAppearanceFromDockingView = YES;
-		_standardAppearance = [LNPopupBarAppearance new];
+//		_standardAppearance = [LNPopupBarAppearance new];
 		
 		_backgroundView = [[_LNPopupBarBackgroundView alloc] initWithEffect:nil];
 		_backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -445,12 +445,12 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 	[self _internalSetBackgroundColor:_userBackgroundColor];
 }
 
-- (void)setSystemAppearance:(UIBarAppearance *)systemAppearance
-{
-	_systemAppearance = [systemAppearance copy];
-	
-	[self _recalcActiveAppearanceChain];
-}
+//- (void)setSystemAppearance:(UIBarAppearance *)systemAppearance
+//{
+//	_systemAppearance = [systemAppearance copy];
+//
+//	[self _recalcActiveAppearanceChain];
+//}
 
 - (void)setStandardAppearance:(LNPopupBarAppearance *)standardAppearance
 {
@@ -472,10 +472,10 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 	
 	NSMutableArray* chain = [NSMutableArray new];
 	
-	if(self.popupItem.standardAppearance != nil)
-	{
-		[chain addObject:self.popupItem.standardAppearance];
-	}
+//	if(self.popupItem.standardAppearance != nil)
+//	{
+//		[chain addObject:self.popupItem.standardAppearance];
+//	}
 	
 	if(self.systemAppearance != nil)
 	{
@@ -983,11 +983,11 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 
 - (void)_setTitleLabelFontsAccordingToBarStyleAndTint
 {
-	NSDictionary* titleTextAttributes = [self.activeAppearanceChain objectForKey:@"titleTextAttributes"];
-	NSDictionary* subtitleTextAttributes = [self.activeAppearanceChain objectForKey:@"subtitleTextAttributes"];
+//	NSDictionary* titleTextAttributes = [self.activeAppearanceChain objectForKey:@"titleTextAttributes"];
+//	NSDictionary* subtitleTextAttributes = [self.activeAppearanceChain objectForKey:@"subtitleTextAttributes"];
 	
-	_titleLabel.textColor = titleTextAttributes[NSForegroundColorAttributeName] ?: [UIColor labelColor];
-	_subtitleLabel.textColor = subtitleTextAttributes[NSForegroundColorAttributeName] ?: [UIColor secondaryLabelColor];
+//	_titleLabel.textColor = titleTextAttributes[NSForegroundColorAttributeName] ?: [UIColor labelColor];
+//	_subtitleLabel.textColor = subtitleTextAttributes[NSForegroundColorAttributeName] ?: [UIColor secondaryLabelColor];
 }
 
 - (void)_setTitleViewMarqueesPaused:(BOOL)paused

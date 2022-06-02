@@ -865,23 +865,23 @@ static CGFloat __smoothstep(CGFloat a, CGFloat b, CGFloat x)
 		return;
 	}
 	
-	UIBarAppearance* appearanceToUse = nil;
-	
-	//visualProvider.toolbarIsSmall
-	if([_bottomBar isKindOfClass:UIToolbar.class] &&  [[_bottomBar valueForKeyPath:_LNPopupDecodeBase64String(vPTIS)] boolValue] == YES)
-	{
-		appearanceToUse = [(UIToolbar*)_bottomBar compactAppearance];
-	}
-	
-	if(appearanceToUse == nil && [_bottomBar respondsToSelector:@selector(standardAppearance)])
-	{
-		appearanceToUse = [(id<_LNPopupBarSupport>)_bottomBar standardAppearance];
-	}
+//	UIBarAppearance* appearanceToUse = nil;
+//
+//	//visualProvider.toolbarIsSmall
+//	if([_bottomBar isKindOfClass:UIToolbar.class] &&  [[_bottomBar valueForKeyPath:_LNPopupDecodeBase64String(vPTIS)] boolValue] == YES)
+//	{
+//		appearanceToUse = [(UIToolbar*)_bottomBar compactAppearance];
+//	}
+//
+//	if(appearanceToUse == nil && [_bottomBar respondsToSelector:@selector(standardAppearance)])
+//	{
+//		appearanceToUse = [(id<_LNPopupBarSupport>)_bottomBar standardAppearance];
+//	}
 	
 	self.popupBar.tintColor = _bottomBar.tintColor;
 	self.popupBar.backgroundColor = _bottomBar.backgroundColor;
 	
-	self.popupBar.systemAppearance = appearanceToUse;
+//	self.popupBar.systemAppearance = appearanceToUse;
 }
 
 - (void)_updateBarExtensionStyleFromPopupBar
@@ -1267,11 +1267,13 @@ static void __LNPopupControllerDeeplyEnumerateSubviewsUsingBlock(UIView* view, v
 		return 0;
 	}
 	
-	if(view.window.safeAreaInsets.top == 0)
-	{
-		//Probably 🤷‍♂️ an old iPhone
-		return view.window.windowScene.statusBarManager.statusBarHidden ? 0 : 20;
-	}
+    if (@available(iOS 11, *)) {
+        if(view.window.safeAreaInsets.top == 0)
+        {
+            //Probably 🤷‍♂️ an old iPhone
+            return view.window.windowScene.statusBarManager.statusBarHidden ? 0 : 20;
+        }
+    }
 	
 	return view.window.safeAreaInsets.top;
 #endif

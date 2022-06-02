@@ -18,7 +18,7 @@ static NSString* const cO = @"Y2hhbmdlT2JzZXJ2ZXI=";
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p chain:--->", self.class];
+    return [NSString stringWithFormat:@"<%@: chain:--->", self.class];
 }
 
 - (id)objectForKey:(NSString*)key

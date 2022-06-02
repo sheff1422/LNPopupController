@@ -268,7 +268,7 @@ LNPopupCloseButtonStyle _LNPopupResolveCloseButtonStyleFromCloseButtonStyle(LNPo
 		alphaLessThanZero = CGColorGetAlpha(vc.view.backgroundColor.CGColor) < 1.0;
 	};
 	
-	[vc.traitCollection performAsCurrentTraitCollection:block];
+//	[vc.traitCollection performAsCurrentTraitCollection:block];
 	
 	if(alphaLessThanZero)
 	{
