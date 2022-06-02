@@ -3,7 +3,7 @@
 //  LNPopupController
 //
 //  Created by Leo Natan on 15/12/2016.
-//  Copyright © 2016 Leo Natan. All rights reserved.
+//  Copyright © 2015-2021 Leo Natan. All rights reserved.
 //
 
 #import "LNPopupCustomBarViewController+Private.h"
@@ -44,6 +44,11 @@
 	return YES;
 }
 
+- (BOOL)wantsDefaultHighlightGestureRecognizer
+{
+	return YES;
+}
+
 - (void)setPreferredContentSize:(CGSize)preferredContentSize
 {
 	[super setPreferredContentSize:preferredContentSize];
@@ -51,6 +56,16 @@
 
 - (void)popupItemDidUpdate
 {
+}
+
+- (UIViewController*)popupContentViewController
+{
+	return self.popupController.currentContentController;
+}
+
+- (UIViewController*)popupPresentationContainerViewController
+{
+	return self.popupController.containerController;
 }
 
 @end

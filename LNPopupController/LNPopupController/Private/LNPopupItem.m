@@ -3,7 +3,7 @@
 //  LNPopupController
 //
 //  Created by Leo Natan on 7/25/15.
-//  Copyright © 2015 Leo Natan. All rights reserved.
+//  Copyright © 2015-2021 Leo Natan. All rights reserved.
 //
 
 #import "LNPopupItem+Private.h"
@@ -28,13 +28,15 @@ static NSArray* __keys;
 			NSStringFromSelector(@selector(subtitle)),
 			NSStringFromSelector(@selector(image)),
 			NSStringFromSelector(@selector(progress)),
-			NSStringFromSelector(@selector(leftBarButtonItems)),
-			NSStringFromSelector(@selector(rightBarButtonItems)),
+			NSStringFromSelector(@selector(leadingBarButtonItems)),
+			NSStringFromSelector(@selector(trailingBarButtonItems)),
 			NSStringFromSelector(@selector(accessibilityLabel)),
 			NSStringFromSelector(@selector(accessibilityHint)),
 			NSStringFromSelector(@selector(accessibilityImageLabel)),
 			NSStringFromSelector(@selector(accessibilityProgressLabel)),
-			NSStringFromSelector(@selector(accessibilityProgressValue))
+			NSStringFromSelector(@selector(accessibilityProgressValue)),
+			NSStringFromSelector(@selector(swiftuiImageController)),
+			NSStringFromSelector(@selector(standardAppearance))
 		];
 	});
 }
@@ -82,8 +84,48 @@ static NSArray* __keys;
 {
 	[self willChangeValueForKey:NSStringFromSelector(_cmd)];
 	if(progress > 1.0) { progress = 1.0; }
+	if(progress < 0.0) { progress = 0.0; }
 	_progress = progress;
 	[self didChangeValueForKey:NSStringFromSelector(_cmd)];
 }
 
+- (NSArray<UIBarButtonItem *> *)barButtonItems
+{
+	return self.trailingBarButtonItems;
+}
+
+- (void)setBarButtonItems:(NSArray<UIBarButtonItem *> *)barButtonItems
+{
+	self.trailingBarButtonItems = barButtonItems;
+}
+
 @end
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+@implementation LNPopupItem (Deprecated)
+
+- (NSArray<UIBarButtonItem *> *)leftBarButtonItems
+{
+	return self.leadingBarButtonItems;
+}
+
+- (void)setLeftBarButtonItems:(NSArray<UIBarButtonItem *> *)leftBarButtonItems
+{
+	self.leadingBarButtonItems = leftBarButtonItems;
+}
+
+- (NSArray<UIBarButtonItem *> *)rightBarButtonItems
+{
+	return self.trailingBarButtonItems;
+}
+
+- (void)setRightBarButtonItems:(NSArray<UIBarButtonItem *> *)rightBarButtonItems
+{
+	self.trailingBarButtonItems = rightBarButtonItems;
+}
+
+@end
+
+#pragma clang diagnostic pop
