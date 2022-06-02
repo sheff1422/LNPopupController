@@ -482,7 +482,7 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 		[chain addObject:self.systemAppearance];
 	}
 	
-	[chain addObject:self.standardAppearance];
+//	[chain addObject:self.standardAppearance];
 	
 //	_activeAppearanceChain = [[_LNPopupBarAppearanceChainProxy alloc] initWithAppearanceChain:chain];
 //	[_activeAppearanceChain setChainDelegate:self];
@@ -1366,101 +1366,101 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 
 - (void)setBackgroundStyle:(UIBlurEffectStyle)backgroundStyle
 {
-	UIBlurEffectStyle blurEffectStyle = backgroundStyle == LNBackgroundStyleInherit ? UIBlurEffectStyleSystemChromeMaterial : backgroundStyle;
-	
-	self.standardAppearance.backgroundEffect = [UIBlurEffect effectWithStyle:blurEffectStyle];
+//	UIBlurEffectStyle blurEffectStyle = backgroundStyle == LNBackgroundStyleInherit ? UIBlurEffectStyleSystemChromeMaterial : backgroundStyle;
+//
+//	self.standardAppearance.backgroundEffect = [UIBlurEffect effectWithStyle:blurEffectStyle];
 }
 
 - (UIBlurEffectStyle)backgroundStyle
 {
-	return [[self.standardAppearance.backgroundEffect valueForKey:@"style"] unsignedIntegerValue];
+    return UIBlurEffectStyleLight;//[[self.standardAppearance.backgroundEffect valueForKey:@"style"] unsignedIntegerValue];
 }
 
 - (void)setBarTintColor:(UIColor *)barTintColor
 {
-	self.standardAppearance.backgroundColor = barTintColor;
+	//self.standardAppearance.backgroundColor = barTintColor;
 }
 
 - (UIColor *)barTintColor
 {
-	return self.standardAppearance.backgroundColor;
+    return [UIColor whiteColor];//self.standardAppearance.backgroundColor;
 }
 
 - (void)setTranslucent:(BOOL)translucent
 {
-	if(translucent)
-	{
-		[self.standardAppearance configureWithDefaultBackground];
-	}
-	else
-	{
-		[self.standardAppearance configureWithOpaqueBackground];
-	}
+//	if(translucent)
+//	{
+//		[self.standardAppearance configureWithDefaultBackground];
+//	}
+//	else
+//	{
+//		[self.standardAppearance configureWithOpaqueBackground];
+//	}
 }
 
 - (BOOL)isTranslucent
 {
-	return self.standardAppearance.backgroundEffect == nil;
+    return YES;//self.standardAppearance.backgroundEffect == nil;
 }
 
 - (void)setTitleTextAttributes:(NSDictionary<NSAttributedStringKey,id> *)titleTextAttributes
 {
-	self.standardAppearance.titleTextAttributes = titleTextAttributes;
+	//self.standardAppearance.titleTextAttributes = titleTextAttributes;
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)titleTextAttributes
 {
-	return self.standardAppearance.titleTextAttributes;
+    return @{}; //self.standardAppearance.titleTextAttributes;
 }
 
 - (void)setSubtitleTextAttributes:(NSDictionary<NSAttributedStringKey,id> *)subtitleTextAttributes
 {
-	self.standardAppearance.subtitleTextAttributes = subtitleTextAttributes;
+	//self.standardAppearance.subtitleTextAttributes = subtitleTextAttributes;
 }
 
 - (NSDictionary<NSAttributedStringKey,id> *)subtitleTextAttributes
 {
-	return self.standardAppearance.subtitleTextAttributes;
+    return @{};//self.standardAppearance.subtitleTextAttributes;
 }
 
 - (void)setMarqueeScrollEnabled:(BOOL)marqueeScrollEnabled
 {
-	self.standardAppearance.marqueeScrollEnabled = marqueeScrollEnabled;
+	//self.standardAppearance.marqueeScrollEnabled = marqueeScrollEnabled;
 }
 
 - (BOOL)marqueeScrollEnabled
 {
-	return self.standardAppearance.marqueeScrollEnabled;
+    return YES;//self.standardAppearance.marqueeScrollEnabled;
 }
 
 - (void)setMarqueeScrollRate:(CGFloat)marqueeScrollRate
 {
-	self.standardAppearance.marqueeScrollRate = marqueeScrollRate;
+	//self.standardAppearance.marqueeScrollRate = marqueeScrollRate;
 }
 
 - (CGFloat)marqueeScrollRate
 {
-	return self.standardAppearance.marqueeScrollRate;
+    return 0;//self.standardAppearance.marqueeScrollRate;
 }
 
 - (void)setMarqueeScrollDelay:(NSTimeInterval)marqueeScrollDelay
 {
-	self.standardAppearance.marqueeScrollDelay = marqueeScrollDelay;
+    //self.standardAppearance.marqueeScrollDelay = marqueeScrollDelay;
 }
 
 - (NSTimeInterval)marqueeScrollDelay
 {
-	return self.standardAppearance.marqueeScrollDelay;
+    return 0;//self.standardAppearance.marqueeScrollDelay;
 }
 
 - (void)setCoordinateMarqueeScroll:(BOOL)coordinateMarqueeScroll
 {
-	self.standardAppearance.coordinateMarqueeScroll = coordinateMarqueeScroll;
+	//self.standardAppearance.coordinateMarqueeScroll = coordinateMarqueeScroll;
 }
 
 - (BOOL)coordinateMarqueeScroll
 {
-	return self.standardAppearance.coordinateMarqueeScroll;
+    return YES;//self.standardAppearance.coordinateMarqueeScroll;
 }
 
 - (NSArray<UIBarButtonItem *> *)leftBarButtonItems
