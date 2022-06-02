@@ -908,14 +908,14 @@ static CGFloat __smoothstep(CGFloat a, CGFloat b, CGFloat x)
 	if(_bottomBar.superview != nil)
 	{
 		[_bottomBar.superview insertSubview:self.popupBar belowSubview:_bottomBar];
-		[self.popupBar.superview bringSubviewToFront:self.popupBar];
-		[self.popupBar.superview bringSubviewToFront:_bottomBar];
+//		[self.popupBar.superview bringSubviewToFront:self.popupBar];
+//		[self.popupBar.superview bringSubviewToFront:_bottomBar];
 		[self.popupBar.superview insertSubview:self.popupContentView belowSubview:self.popupBar];
 	}
 	else
 	{
-		[_containerController.view addSubview:self.popupBar];
-		[_containerController.view bringSubviewToFront:self.popupBar];
+//		[_containerController.view addSubview:self.popupBar];
+//		[_containerController.view bringSubviewToFront:self.popupBar];
 		[_containerController.view insertSubview:self.popupContentView belowSubview:self.popupBar];
 	}
 }
