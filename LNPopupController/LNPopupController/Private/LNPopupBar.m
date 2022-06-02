@@ -382,7 +382,7 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 		_progressView.frame = CGRectMake(0, _contentView.bounds.size.height - 2.5, _contentView.bounds.size.width, 1.5);
 	}
 	
-	[self _layoutTitles];
+//	[self _layoutTitles];
 }
 
 - (NSString*)_effectGroupingIdentifierKey
@@ -775,128 +775,128 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 
 - (void)_layoutTitles
 {
-	UIEdgeInsets titleInsets = UIEdgeInsetsZero;
-	
-	if(_resolvedStyle == LNPopupBarStyleProminent)
-	{
-		[self _updateTitleInsetsForProminentBar:&titleInsets];
-	}
-	else
-	{
-		[self _updateTitleInsetsForCompactBar:&titleInsets];
-	}
-	
-	titleInsets.left = MAX(titleInsets.left, self.layoutMargins.left);
-	titleInsets.right = MAX(titleInsets.right, self.layoutMargins.right);
-	
-	CGRect frame = _titlesView.frame;
-	frame.size.width = self.bounds.size.width - titleInsets.left - titleInsets.right;
-	frame.size.height = _contentView.bounds.size.height;
-	frame.origin.x = titleInsets.left;
-	
-	_titlesView.frame = frame;
-	
-	if(_needsLabelsLayout == YES)
-	{
-		if(_titleLabel == nil)
-		{
-			_titleLabel = [self _newMarqueeLabel];
-			_titleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:18 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:14];
-			[_titlesView addSubview:_titleLabel];
-		}
-		
-		BOOL reset = NO;
-		
-		NSAttributedString* attr = _title ? [[NSAttributedString alloc] initWithString:_title attributes:[self.activeAppearanceChain objectForKey:@"titleTextAttributes"]] : nil;
-		if(_title != nil && [_titleLabel.attributedText isEqualToAttributedString:attr] == NO)
-		{
-			_titleLabel.attributedText = attr;
-			reset = YES;
-		}
-		
-		if(_subtitleLabel == nil)
-		{
-			_subtitleLabel = [self _newMarqueeLabel];
-			_subtitleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:14 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:11];
-			[_titlesView addSubview:_subtitleLabel];
-		}
-		
-		attr = _subtitle ? [[NSAttributedString alloc] initWithString:_subtitle attributes:[self.activeAppearanceChain objectForKey:@"subtitleTextAttributes"]] : nil;
-		if(_subtitle != nil && [_subtitleLabel.attributedText isEqualToAttributedString:attr] == NO)
-		{
-			_subtitleLabel.attributedText = attr;
-			reset = YES;
-		}
-		
-		if(reset)
-		{
-			[_titleLabel resetLabel];
-			[_subtitleLabel resetLabel];
-		}
-	}
-	
-	[self _setTitleLabelFontsAccordingToBarStyleAndTint];
-	
-	CGRect titleLabelFrame = _titlesView.bounds;
-	
-	CGFloat barHeight = _LNPopupBarHeightForBarStyle(_resolvedStyle, _customBarViewController);
-	titleLabelFrame.size.height = barHeight;
-	
-	//Add some padding for compact bar
-	if(_resolvedStyle == LNPopupBarStyleCompact)
-	{
-		titleLabelFrame.origin.x += 8;
-		titleLabelFrame.size.width -= 16;
-	}
-	
-	if(_subtitle.length > 0)
-	{
-		CGRect subtitleLabelFrame = _titlesView.bounds;
-		subtitleLabelFrame.size.height = barHeight;
-		
-		if(_resolvedStyle == LNPopupBarStyleProminent)
-		{
-			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2.1;
-			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 1.5;
-		}
-		else
-		{
-			//Add some padding for compact bar
-			subtitleLabelFrame.origin.x += 8;
-			subtitleLabelFrame.size.width -= 16;
-			
-			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2;
-			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 2;
-		}
-		
-		_subtitleLabel.frame = subtitleLabelFrame;
-		_subtitleLabel.hidden = NO;
-		
-		if(_needsLabelsLayout == YES)
-		{
-			if([_subtitleLabel isPaused] && [_titleLabel isPaused] == NO)
-			{
-				[_subtitleLabel unpauseLabel];
-			}
-		}
-	}
-	else
-	{
-		if(_needsLabelsLayout == YES)
-		{
-			[_subtitleLabel resetLabel];
-			[_subtitleLabel pauseLabel];
-			_subtitleLabel.hidden = YES;
-		}
-	}
-	
-	[self _updateAccessibility];
-	
-	_titleLabel.frame = titleLabelFrame;
-	
-	[self _recalculateCoordinatedMarqueeScrollIfNeeded];
-	
-	_needsLabelsLayout = NO;
+//	UIEdgeInsets titleInsets = UIEdgeInsetsZero;
+//	
+//	if(_resolvedStyle == LNPopupBarStyleProminent)
+//	{
+//		[self _updateTitleInsetsForProminentBar:&titleInsets];
+//	}
+//	else
+//	{
+//		[self _updateTitleInsetsForCompactBar:&titleInsets];
+//	}
+//	
+//	titleInsets.left = MAX(titleInsets.left, self.layoutMargins.left);
+//	titleInsets.right = MAX(titleInsets.right, self.layoutMargins.right);
+//	
+//	CGRect frame = _titlesView.frame;
+//	frame.size.width = self.bounds.size.width - titleInsets.left - titleInsets.right;
+//	frame.size.height = _contentView.bounds.size.height;
+//	frame.origin.x = titleInsets.left;
+//	
+//	_titlesView.frame = frame;
+//	
+//	if(_needsLabelsLayout == YES)
+//	{
+//		if(_titleLabel == nil)
+//		{
+//			_titleLabel = [self _newMarqueeLabel];
+//			_titleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:18 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:14];
+//			[_titlesView addSubview:_titleLabel];
+//		}
+//		
+//		BOOL reset = NO;
+//		
+//		NSAttributedString* attr = _title ? [[NSAttributedString alloc] initWithString:_title attributes:[self.activeAppearanceChain objectForKey:@"titleTextAttributes"]] : nil;
+//		if(_title != nil && [_titleLabel.attributedText isEqualToAttributedString:attr] == NO)
+//		{
+//			_titleLabel.attributedText = attr;
+//			reset = YES;
+//		}
+//		
+//		if(_subtitleLabel == nil)
+//		{
+//			_subtitleLabel = [self _newMarqueeLabel];
+//			_subtitleLabel.font = _resolvedStyle == LNPopupBarStyleProminent ? [UIFont systemFontOfSize:14 weight:UIFontWeightRegular] : [UIFont systemFontOfSize:11];
+//			[_titlesView addSubview:_subtitleLabel];
+//		}
+//		
+//		attr = _subtitle ? [[NSAttributedString alloc] initWithString:_subtitle attributes:[self.activeAppearanceChain objectForKey:@"subtitleTextAttributes"]] : nil;
+//		if(_subtitle != nil && [_subtitleLabel.attributedText isEqualToAttributedString:attr] == NO)
+//		{
+//			_subtitleLabel.attributedText = attr;
+//			reset = YES;
+//		}
+//		
+//		if(reset)
+//		{
+//			[_titleLabel resetLabel];
+//			[_subtitleLabel resetLabel];
+//		}
+//	}
+//	
+//	[self _setTitleLabelFontsAccordingToBarStyleAndTint];
+//	
+//	CGRect titleLabelFrame = _titlesView.bounds;
+//	
+//	CGFloat barHeight = _LNPopupBarHeightForBarStyle(_resolvedStyle, _customBarViewController);
+//	titleLabelFrame.size.height = barHeight;
+//	
+//	//Add some padding for compact bar
+//	if(_resolvedStyle == LNPopupBarStyleCompact)
+//	{
+//		titleLabelFrame.origin.x += 8;
+//		titleLabelFrame.size.width -= 16;
+//	}
+//	
+//	if(_subtitle.length > 0)
+//	{
+//		CGRect subtitleLabelFrame = _titlesView.bounds;
+//		subtitleLabelFrame.size.height = barHeight;
+//		
+//		if(_resolvedStyle == LNPopupBarStyleProminent)
+//		{
+//			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2.1;
+//			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 1.5;
+//		}
+//		else
+//		{
+//			//Add some padding for compact bar
+//			subtitleLabelFrame.origin.x += 8;
+//			subtitleLabelFrame.size.width -= 16;
+//			
+//			titleLabelFrame.origin.y -= _titleLabel.font.lineHeight / 2;
+//			subtitleLabelFrame.origin.y += _subtitleLabel.font.lineHeight / 2;
+//		}
+//		
+//		_subtitleLabel.frame = subtitleLabelFrame;
+//		_subtitleLabel.hidden = NO;
+//		
+//		if(_needsLabelsLayout == YES)
+//		{
+//			if([_subtitleLabel isPaused] && [_titleLabel isPaused] == NO)
+//			{
+//				[_subtitleLabel unpauseLabel];
+//			}
+//		}
+//	}
+//	else
+//	{
+//		if(_needsLabelsLayout == YES)
+//		{
+//			[_subtitleLabel resetLabel];
+//			[_subtitleLabel pauseLabel];
+//			_subtitleLabel.hidden = YES;
+//		}
+//	}
+//	
+//	[self _updateAccessibility];
+//	
+//	_titleLabel.frame = titleLabelFrame;
+//	
+//	[self _recalculateCoordinatedMarqueeScrollIfNeeded];
+//	
+//	_needsLabelsLayout = NO;
 }
 
 - (void)_updateAccessibility
