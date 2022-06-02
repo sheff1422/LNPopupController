@@ -487,7 +487,6 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 //	_activeAppearanceChain = [[_LNPopupBarAppearanceChainProxy alloc] initWithAppearanceChain:chain];
 //	[_activeAppearanceChain setChainDelegate:self];
 	
-	[self _appearanceDidChange];
 }
 
 - (void)setPopupItem:(LNPopupItem *)popupItem
@@ -495,30 +494,6 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 	_popupItem = popupItem;
 	
 	[self _recalcActiveAppearanceChain];
-}
-
-- (void)popupBarAppearanceDidChange:(LNPopupBarAppearance*)popupBarAppearance
-{
-	[self _appearanceDidChange];
-}
-
-- (void)_appearanceDidChange
-{
-	_highlightView.backgroundColor =  [self.activeAppearanceChain objectForKey:@"highlightColor"];
-	self.backgroundView.effect = [self.activeAppearanceChain objectForKey:@"backgroundEffect"];
-	self.backgroundView.colorView.backgroundColor = [self.activeAppearanceChain objectForKey:@"backgroundColor"];
-	self.backgroundView.imageView.image = [self.activeAppearanceChain objectForKey:@"backgroundImage"];
-	self.backgroundView.imageView.contentMode = [self.activeAppearanceChain unsignedIntegerForKey:@"backgroundImageContentMode"];
-	_toolbar.standardAppearance.buttonAppearance = [self.activeAppearanceChain objectForKey:@"buttonAppearance"] ?: _toolbar.standardAppearance.buttonAppearance;
-	_toolbar.standardAppearance.doneButtonAppearance = [self.activeAppearanceChain objectForKey:@"doneButtonAppearance"] ?: _toolbar.standardAppearance.doneButtonAppearance;
-	_shadowView.backgroundColor = [self.activeAppearanceChain objectForKey:@"shadowColor"];
-	
-	//Recalculate labels
-	[self _setTitleLabelFontsAccordingToBarStyleAndTint];
-	[self _setNeedsTitleLayout];
-	[self _recalculateCoordinatedMarqueeScrollIfNeeded];
-	
-	[self._barDelegate _popupBarStyleDidChange:self];
 }
 
 - (void)setProgressViewStyle:(LNPopupBarProgressViewStyle)progressViewStyle
