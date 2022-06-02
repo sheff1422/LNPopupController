@@ -22,7 +22,6 @@
 
 @interface _LNPopupBarAppearanceChainProxy : NSObject
 
-- (instancetype)initWithAppearanceChain:(NSArray<UIBarAppearance*>*)chain;
 - (id)objectForKey:(NSString*)key;
 - (BOOL)boolForKey:(NSString*)key;
 - (NSUInteger)unsignedIntegerForKey:(NSString*)key;

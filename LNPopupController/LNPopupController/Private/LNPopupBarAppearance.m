@@ -15,40 +15,25 @@ static NSString* const aCC = @"YXBwZWFyYW5jZTpjYXRlZ29yaWVzQ2hhbmdlZDo=";
 static NSString* const cO = @"Y2hhbmdlT2JzZXJ2ZXI=";
 
 @implementation _LNPopupBarAppearanceChainProxy
-{
-	NSArray<UIBarAppearance*>* _chain;
-}
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: %p chain: %@>", self.class, self, _chain];
-}
-
-- (instancetype)initWithAppearanceChain:(NSArray<UIBarAppearance*>*)chain
-{
-	self = [super init];
-	
-	if(self)
-	{
-		_chain = chain;
-	}
-	
-	return self;
+    return [NSString stringWithFormat:@"<%@: %p chain:--->", self.class];
 }
 
 - (id)objectForKey:(NSString*)key
 {
 	__block id rv = nil;
 	
-	[_chain enumerateObjectsUsingBlock:^(UIBarAppearance * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		id candidateRV;
-		if([obj respondsToSelector:NSSelectorFromString(key)])
-		{
-			candidateRV = [obj valueForKey:key];
-			rv = candidateRV;
-			*stop = YES;
-		}
-	}];
+//	[_chain enumerateObjectsUsingBlock:^(UIBarAppearance * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//		id candidateRV;
+//		if([obj respondsToSelector:NSSelectorFromString(key)])
+//		{
+//			candidateRV = [obj valueForKey:key];
+//			rv = candidateRV;
+//			*stop = YES;
+//		}
+//	}];
 	
 	return rv;
 }
@@ -70,12 +55,12 @@ static NSString* const cO = @"Y2hhbmdlT2JzZXJ2ZXI=";
 
 - (void)setChainDelegate:(id<_LNPopupBarAppearanceDelegate>)delegate
 {
-	for (LNPopupBarAppearance* appearance in _chain) {
-		if([appearance isKindOfClass:LNPopupBarAppearance.class])
-		{
-			appearance.delegate = delegate;
-		}
-	}
+//	for (LNPopupBarAppearance* appearance in _chain) {
+//		if([appearance isKindOfClass:LNPopupBarAppearance.class])
+//		{
+//			appearance.delegate = delegate;
+//		}
+//	}
 }
 
 @end

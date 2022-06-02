@@ -111,7 +111,7 @@
 
 - (void)_setupForCircularButton
 {
-	UIBlurEffectStyle blurStyle = UIBlurEffectStyleSystemChromeMaterial;
+	UIBlurEffectStyle blurStyle = UIBlurEffectStyleLight;
 	
 	_effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:blurStyle]];
 	_effectView.userInteractionEnabled = NO;
@@ -141,10 +141,7 @@
 	self.layer.masksToBounds = NO;
 	
 	[self setTitleColor:self.tintColor forState:UIControlStateNormal];
-	
-	UIImageSymbolConfiguration* config = [UIImageSymbolConfiguration configurationWithPointSize:15 weight:UIImageSymbolWeightHeavy scale:UIImageSymbolScaleSmall];
-	UIImage* image = [[UIImage systemImageNamed:@"chevron.down" withConfiguration:config] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-	[self setImage:image forState:UIControlStateNormal];
+
 }
 
 - (void)_didTouchDown

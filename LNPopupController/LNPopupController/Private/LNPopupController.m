@@ -202,7 +202,7 @@ static CGFloat __smoothstep(CGFloat a, CGFloat b, CGFloat x)
 		return;
 	}
 	
-	[self.popupContentView setControllerOverrideUserInterfaceStyle:currentContentController.overrideUserInterfaceStyle];
+//	[self.popupContentView setControllerOverrideUserInterfaceStyle:currentContentController.overrideUserInterfaceStyle];
 	currentContentController.view.translatesAutoresizingMaskIntoConstraints = YES;
 	_currentContentController.view.autoresizingMask = UIViewAutoresizingNone;
 	currentContentController.view.frame = self.popupContentView.contentView.bounds;

@@ -262,7 +262,6 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 		_imageView.contentMode = UIViewContentModeScaleAspectFit;
 		_imageView.accessibilityTraits = UIAccessibilityTraitImage;
 		_imageView.isAccessibilityElement = YES;
-		_imageView.layer.cornerCurve = kCACornerCurveCircular;
 		_imageView.layer.cornerRadius = 6;
 		_imageView.layer.masksToBounds = YES;
 		// support smart invert and therefore do not invert image view colors
@@ -485,8 +484,8 @@ static inline __attribute__((always_inline)) LNPopupBarProgressViewStyle _LNPopu
 	
 	[chain addObject:self.standardAppearance];
 	
-	_activeAppearanceChain = [[_LNPopupBarAppearanceChainProxy alloc] initWithAppearanceChain:chain];
-	[_activeAppearanceChain setChainDelegate:self];
+//	_activeAppearanceChain = [[_LNPopupBarAppearanceChainProxy alloc] initWithAppearanceChain:chain];
+//	[_activeAppearanceChain setChainDelegate:self];
 	
 	[self _appearanceDidChange];
 }

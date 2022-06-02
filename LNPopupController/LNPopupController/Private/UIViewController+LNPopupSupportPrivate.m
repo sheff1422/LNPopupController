@@ -541,7 +541,7 @@ UIEdgeInsets _LNPopupChildAdditiveSafeAreas(id self)
 	_LNPopupBarBackgroundView* rv = objc_getAssociatedObject(self, LNPopupBarExtensionView);
 	if(rv == nil)
 	{
-		rv = [[_LNPopupBarBackgroundView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemChromeMaterial]];
+		rv = [[_LNPopupBarBackgroundView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
 		objc_setAssociatedObject(self, LNPopupBarExtensionView, rv, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		[self._ln_popupController _updateBarExtensionStyleFromPopupBar];
 	}
