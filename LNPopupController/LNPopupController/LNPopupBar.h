@@ -198,7 +198,7 @@ LN_UNAVAILABLE_API(LN_UNAVAILABLE_PREVIEWING_MSG)
  *
  * You may specify the font, text color, and shadow properties for the title in the text attributes dictionary, using the keys found in @c NSAttributedString.h.
  */
-@property (nullable, nonatomic, copy) NSDictionary<NSAttributedStringKey, id>* titleTextAttributes UI_APPEARANCE_SELECTOR LN_DEPRECATED_API("Use LNPopupBarAppearance.titleTextAttributes instead.");
+@property (nullable, nonatomic, copy) NSDictionary<NSAttributedStringKey, id>* titleTextAttributes;
 
 /**
  * Display attributes for the popup bar’s subtitle text.
